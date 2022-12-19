@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { ViewWillEnter } from "@ionic/angular";
 import { AuthService } from "src/app/auth/auth.service";
+import { environment } from "src/environments/environment";
 
 @Component({
   selector: 'app-home',
@@ -19,8 +20,7 @@ export class HomePage implements OnInit {
   //In your application, you should define dedicated services that will handle calling your API.
 
   ionViewWillEnter(): void {
-    // Make an HTTP request to retrieve the trips.
-    const url = "https://travel-log-sqtk.onrender.com/api/trips";
+    const url = `${environment.apiUrl}/trips`;
     this.http.get(url).subscribe((trips) => {
       console.log(`Trips loaded`, trips);
     });

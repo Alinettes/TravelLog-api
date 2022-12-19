@@ -8,8 +8,7 @@ import { User } from "../models/user";
 import { AuthRequest } from "../models/auth-request";
 
 import { Storage } from "@ionic/storage";
-
-const API_URL = "https://travel-log-sqtk.onrender.com/api";
+import { environment } from "src/environments/environment";
 
 /**
  * Authentication service for login/logout.
@@ -45,7 +44,7 @@ export class AuthService {
   }
 
   logIn$(authRequest: AuthRequest): Observable<User> {
-    const authUrl = `${API_URL}/auth`;
+    const authUrl = `${environment.apiUrl}/auth`;
     return this.http.post<AuthResponse>(authUrl, authRequest).pipe(
       delayWhen((auth) => this.saveAuth$(auth)),
       map((auth) => {
