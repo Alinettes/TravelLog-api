@@ -8,18 +8,18 @@
   <div class="header">
     <h1>Voyages</h1>
     <div id="buttons">
-      <ion-button shape="round">
+      <ion-button size="small" shape="round">
         <ion-icon slot="icon-only" name="add"></ion-icon>
       </ion-button>
 
-      <ion-button shape="round">
+      <ion-button size="small" shape="round">
         <ion-icon slot="icon-only" name="filter"></ion-icon>
       </ion-button>
     </div>
   </div>
 
   <div id="trips">
-    <ion-card *ngFor="let trip of trips" class="trip">
+    <ion-card *ngFor="let trip of trips" class="trip" button="true">
       <ion-card-header>
         <ion-card-title>{{ trip.title }}</ion-card-title>
         <ion-card-subtitle><!-- {{ trip.userId }} --> pseudoUser</ion-card-subtitle>
@@ -30,13 +30,13 @@
   <div class="header">
     <h1>Lieux</h1>
     <div id="buttons">
-      <ion-button shape="round">
+      <ion-button size="small" shape="round">
         <ion-icon slot="icon-only" name="add"></ion-icon>
       </ion-button>
     </div>
   </div>
   <div id="places">
-    <ion-card *ngFor="let place of places" class="place"> <!-- {{ place.pictureUrl }} -->
+    <ion-card *ngFor="let place of places" class="place" button="true">
       <img src="{{ place.pictureUrl }}" />
       <ion-card-header>
         <ion-card-title>{{ place.name }}</ion-card-title>

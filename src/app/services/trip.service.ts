@@ -16,4 +16,9 @@ export class TripService {
     return this.http
       .get<Trip[]>(`${environment.apiUrl}/trips`);
   }
+
+  getTripById(id: string): Observable<Trip[]> {
+    return this.http
+      .get<Trip[]>(`${environment.apiUrl}/trips/${id}`);
+  }
 }

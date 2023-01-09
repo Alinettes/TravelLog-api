@@ -15,8 +15,6 @@ import { Place } from '../../models/place'
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit {
-  /* title: string;
-  titleComment: string; */
   trips: Trip[];
   places: Place[];
 
