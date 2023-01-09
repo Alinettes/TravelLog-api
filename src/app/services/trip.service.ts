@@ -3,6 +3,7 @@ import { Trip } from '../models/trip'
 import { environment } from "src/environments/environment";
 import { Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { mergeMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
