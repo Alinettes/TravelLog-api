@@ -17,9 +17,9 @@ export class LayoutPage {
 
   constructor() {
     this.tabs = [
-      { title: "Accueil", icon: "add", path: "home" },
+      { title: "Accueil", icon: "home", path: "home" },
       { title: "Carte", icon: "map", path: "places-map" },
-      { title: "Profil", icon: "list", path: "profile-user" },
+      { title: "Profil", icon: "person-circle", path: "profile-user" },
     ];
   }
 }

@@ -8,12 +8,15 @@ import { PlacesMapPageRoutingModule } from './places-map-routing.module';
 
 import { PlacesMapPage } from './places-map.page';
 
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    PlacesMapPageRoutingModule
+    PlacesMapPageRoutingModule, 
+    LeafletModule
   ],
   declarations: [PlacesMapPage]
 })
