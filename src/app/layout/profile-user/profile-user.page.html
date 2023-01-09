@@ -11,6 +11,38 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  Profil
-</ion-content>
+  <ion-content [scrollEvents]="true" (ionScrollStart)="handleScrollStart()" (ionScroll)="handleScroll($any($event))"
+    (ionScrollEnd)="handleScrollEnd()" class="ion-padding">
+    <div *ngIf="auth.getUser$() | async as user">
+    <h2>{{ user.name }}</h2>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Mes voyages</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-list>
+          <!-- 
+            // Rendre les informations dynamiques
+            -> Pour chaque voyage, afficher une image d'un lieu, le nom du lieu
+            // Ajouter un bouton pour ajouter un voyage
+          -->
+          <ion-item>
+            <ion-thumbnail slot="start">
+              <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/thumbnail.svg" />
+            </ion-thumbnail>
+            <ion-label>Item</ion-label>
+          </ion-item>
+          <!-- <li *ngFor="let trip of trips">
+            <ion-item>
+              <ion-thumbnail slot="start">
+                <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/thumbnail.svg" />
+              </ion-thumbnail>
+              <ion-label>{{ trip.name }}</ion-label>
+            </ion-item>
+          </li> -->
+
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+  </div>
+  </ion-content>
