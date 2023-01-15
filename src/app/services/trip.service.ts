@@ -21,4 +21,13 @@ export class TripService {
     return this.http
       .get<Trip[]>(`${environment.apiUrl}/trips/${id}`);
   }
+
+  // Recupérer les voyages de l'utilisateur loggé
+  // Doit être utilisé dans profile-user.page.ts
+  getTripsFromUser(id: number): Observable<Trip[]> {
+    return this.http
+      .get<Trip[]>(`${environment.apiUrl}/trips/${id}`);
+  }
+
+
 }
