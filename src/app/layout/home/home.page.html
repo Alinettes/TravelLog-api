@@ -5,12 +5,10 @@
 </ion-header>
 
 <ion-content>
-<ion-button (click)="showNewTripModal()">+ Voyage</ion-button>
-<ion-button id="open-modal" (click)="showNewPlaceModal()">+ Lieu</ion-button>
   <div class="header ion-padding-horizontal">
     <h1>Voyages</h1>
     <div id="buttons">
-      <ion-button size="small" shape="round">
+      <ion-button size="small" shape="round" (click)="showNewTripModal()">
         <ion-icon slot="icon-only" name="add"></ion-icon>
       </ion-button>
 
@@ -32,7 +30,7 @@
   <div class="header ion-padding-horizontal">
     <h1>Lieux</h1>
     <div id="buttons">
-      <ion-button size="small" shape="round">
+      <ion-button size="small" shape="round" (click)="showNewPlaceModal()">
         <ion-icon slot="icon-only" name="add"></ion-icon>
       </ion-button>
     </div>
