@@ -17,9 +17,9 @@ export class TripService {
       .get<Trip[]>(`${environment.apiUrl}/trips`);
   }
 
-  getTripById(id: string): Observable<Trip[]> {
+  getTripById(id: string): Observable<Trip> {
     return this.http
-      .get<Trip[]>(`${environment.apiUrl}/trips/${id}`);
+      .get<Trip>(`${environment.apiUrl}/trips/${id}`);
   }
 
   // Recupérer les voyages de l'utilisateur loggé

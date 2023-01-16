@@ -1,0 +1,28 @@
+<ion-content class="ion-padding">
+  <ion-modal trigger="open-modal" (willDismiss)="onWillDismiss($event)"></ion-modal>
+  <form #tripForm="ngForm">
+    <ion-toolbar>
+      <ion-title>Ajouter un voyage</ion-title>
+    </ion-toolbar>
+    <ion-item>
+      <ion-label>Titre</ion-label>
+      <ion-input type="text" placeholder="titre du voyage" name="titre" pattern="[a-zA-Z ]*" [(ngModel)]="titre" required
+      #titreInput="ngModel"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Description</ion-label>
+      <ion-input type="text" placeholder="description" name="description" pattern="[a-zA-Z ]*" min-length="20"
+      max-length="2000" [(ngModel)]="description" required #descriptionInput="ngModel"></ion-input>
+    </ion-item>
+
+    <p *ngIf="titreInput.invalid && titreInput.dirty">
+      Veuillez saisir un titre et uniquement avec des lettres.
+    </p>
+    <p *ngIf="descriptionInput.invalid && descriptionInput.dirty">
+      Veuillez saisir une description uniquement avec des lettres et au minimum avec 20 caractères.
+    </p>
+
+    <ion-button fill="outline" (click)="cancel()">Annuler</ion-button>
+    <ion-button [disabled]="tripForm.invalid" type="submit" (click)="ajouter(tripForm)">Ajouter</ion-button>
+  </form>
+</ion-content>

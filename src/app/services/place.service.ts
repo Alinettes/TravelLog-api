@@ -15,4 +15,14 @@ export class PlaceService {
     return this.http
       .get<Place[]>(`${environment.apiUrl}/places`);
   }
+
+  getPlaceById(id: string): Observable<Place> {
+    return this.http
+      .get<Place>(`${environment.apiUrl}/places/${id}`);
+  }
+
+  getPlacesByTrip(id: string): Observable<Place[]> {
+    return this.http
+      .get<Place[]>(`${environment.apiUrl}/places?trip=${id}`);
+  }
 }

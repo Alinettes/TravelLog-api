@@ -4,11 +4,11 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
-  <div class="header">
+<ion-content>
+  <div class="header ion-padding-horizontal">
     <h1>Voyages</h1>
     <div id="buttons">
-      <ion-button size="small" shape="round">
+      <ion-button size="small" shape="round" (click)="showNewTripModal()">
         <ion-icon slot="icon-only" name="add"></ion-icon>
       </ion-button>
 
@@ -19,24 +19,26 @@
   </div>
 
   <div id="trips">
-    <ion-card *ngFor="let trip of trips" class="trip" button="true">
-      <ion-card-header>
-        <ion-card-title>{{ trip.title }}</ion-card-title>
-        <ion-card-subtitle><!-- {{ trip.userId }} --> pseudoUser</ion-card-subtitle>
-      </ion-card-header>
-    </ion-card>
+    <!-- <ion-nav-link *ngFor="let trip of trips" router-direction="forward" [component]="component"> -->
+      <ion-card *ngFor="let trip of trips" class="trip" button="true" [routerLink]="['trip', trip.id]" routerDirection="forward">
+        <ion-card-header>
+          <ion-card-title>{{ trip.title }}</ion-card-title>
+          <ion-card-subtitle><!-- {{ trip.userId }} --> pseudoUser</ion-card-subtitle>
+        </ion-card-header>
+      </ion-card>
+    <!-- </ion-nav-link> -->
   </div>
 
-  <div class="header">
+  <div class="header ion-padding-horizontal">
     <h1>Lieux</h1>
     <div id="buttons">
-      <ion-button size="small" shape="round">
+      <ion-button size="small" shape="round" (click)="showNewPlaceModal()">
         <ion-icon slot="icon-only" name="add"></ion-icon>
       </ion-button>
     </div>
   </div>
   <div id="places">
-    <ion-card *ngFor="let place of places" class="place" button="true">
+    <ion-card *ngFor="let place of places" class="place" button="true" [routerLink]="['place', place.id]" routerDirection="forward">
       <img src="{{ place.pictureUrl }}" />
       <ion-card-header>
         <ion-card-title>{{ place.name }}</ion-card-title>
