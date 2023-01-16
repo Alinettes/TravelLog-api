@@ -19,12 +19,14 @@
   </div>
 
   <div id="trips">
-    <ion-card *ngFor="let trip of trips" class="trip" button="true" [routerLink]="['/trip', trip.id]">
-      <ion-card-header>
-        <ion-card-title>{{ trip.title }}</ion-card-title>
-        <ion-card-subtitle><!-- {{ trip.userId }} --> pseudoUser</ion-card-subtitle>
-      </ion-card-header>
-    </ion-card>
+    <!-- <ion-nav-link *ngFor="let trip of trips" router-direction="forward" [component]="component"> -->
+      <ion-card *ngFor="let trip of trips" class="trip" button="true" [routerLink]="['trip', trip.id]" routerDirection="forward">
+        <ion-card-header>
+          <ion-card-title>{{ trip.title }}</ion-card-title>
+          <ion-card-subtitle><!-- {{ trip.userId }} --> pseudoUser</ion-card-subtitle>
+        </ion-card-header>
+      </ion-card>
+    <!-- </ion-nav-link> -->
   </div>
 
   <div class="header ion-padding-horizontal">
@@ -36,7 +38,7 @@
     </div>
   </div>
   <div id="places">
-    <ion-card *ngFor="let place of places" class="place" button="true">
+    <ion-card *ngFor="let place of places" class="place" button="true" [routerLink]="['place', place.id]" routerDirection="forward">
       <img src="{{ place.pictureUrl }}" />
       <ion-card-header>
         <ion-card-title>{{ place.name }}</ion-card-title>

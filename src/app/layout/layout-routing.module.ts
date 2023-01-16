@@ -10,19 +10,15 @@ const routes: Routes = [
     children: [
       {
         path: 'home',
-        loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+        loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
       },
       {
         path: 'places-map',
-        loadChildren: () => import('./places-map/places-map.module').then( m => m.PlacesMapPageModule)
+        loadChildren: () => import('./places-map/places-map.module').then(m => m.PlacesMapPageModule)
       },
       {
         path: 'profile-user',
-        loadChildren: () => import('./profile-user/profile-user.module').then( m => m.ProfileUserPageModule)
-      },
-      {
-        path: 'trip/:id',
-        loadChildren: () => import('./trip/trip.module').then(m => m.TripPageModule)
+        loadChildren: () => import('./profile-user/profile-user.module').then(m => m.ProfileUserPageModule)
       },
       {
         path: "",
@@ -37,4 +33,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class LayoutPageRoutingModule {}
+export class LayoutPageRoutingModule { }

@@ -20,7 +20,7 @@ export class TripPage implements OnInit {
   ngOnInit() { }
 
   ionViewWillEnter(): void {
-    let id = this.route.snapshot.params['id']
+    let id = this.route.snapshot.params['tripId']
 
     this.tripService.getTripById(id).subscribe(trip => {
       this.trip = trip

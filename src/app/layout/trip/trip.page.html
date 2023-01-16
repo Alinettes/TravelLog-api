@@ -33,7 +33,7 @@
     </div>
   </div>
   <div id="places">
-    <ion-card *ngFor="let place of places" class="place" button="true">
+    <ion-card *ngFor="let place of places" class="place" button="true" [routerLink]="['place', place.id]" routerDirection="forward">
       <img src="{{ place.pictureUrl }}" />
       <ion-card-header>
         <ion-card-title>{{ place.name }}</ion-card-title>
