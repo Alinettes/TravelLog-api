@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
 
 import { defaultIcon } from './default-marker';
 import { latLng, Map, MapOptions, tileLayer, Marker, marker, LatLngExpression } from 'leaflet';
@@ -6,6 +6,7 @@ import { PlaceService } from '../../services/place.service'
 import { Place } from '../../models/place'
 import { addIcons } from 'ionicons';
 import { threadId } from 'worker_threads';
+import { timingSafeEqual } from 'crypto';
 
 @Component({
   selector: 'app-places-map',
@@ -18,8 +19,9 @@ export class PlacesMapPage implements OnInit {
   mapOptions: MapOptions;
   mapMarkers: Marker[];
   places: Place[];
+  selectedPlaces: Place;
 
-  constructor(private placeService: PlaceService) { 
+  constructor(private placeService: PlaceService, private zone: NgZone) { 
     this.mapOptions = {
            layers: [
              tileLayer(
@@ -27,7 +29,7 @@ export class PlacesMapPage implements OnInit {
                { maxZoom: 18 }
              )
            ],
-           zoom: 13,
+           zoom: 4,
            center: latLng(46.778186, 6.641524)
          };
          
@@ -47,7 +49,7 @@ export class PlacesMapPage implements OnInit {
     setTimeout(() => map.invalidateSize(), 0);
     this.map = map;
     
-    //Ajouter des markers interactifs
+    // Ajouter des markers interactifs
     // this.map.on('click', () =>{
       
     // })
@@ -68,13 +70,25 @@ export class PlacesMapPage implements OnInit {
         console.log(this.places)
         this.places.forEach(place => {
 
-          this.mapMarkers.push(marker(place.location.coordinates as LatLngExpression, { icon: defaultIcon }).bindTooltip(place.name))
+          this.mapMarkers.push(marker(place.location.coordinates as LatLngExpression, { icon: defaultIcon })
+          .bindTooltip(place.name)
+          .on('click', () =>{
+            this.zone.run(() => {
+              this.selectedPlaces = place;
+              console.log(this.selectedPlaces.name)
+            })
+            // console.log(place.name, place.description)
+            
+          })
+          )
           console.log(place.location.coordinates)
         });
         
         
     });
   }
+
+  
 
   
 
