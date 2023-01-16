@@ -6,11 +6,13 @@
 
 <ion-content>
   <!-- <div class="map" leaflet [leafletOptions]="mapOptions"></div> -->
+  <!-- [leafletLayers]="mapMarkers" -->
   <div
-  class="map"
-  leaflet
-  [leafletOptions]="mapOptions"
-  [leafletLayers]="mapMarkers"
-  (leafletMapReady)="onMapReady($event)"
-></div>
-</ion-content>
+    class="map"
+    leaflet
+    [leafletOptions]="mapOptions"
+    [leafletLayers]="mapMarkers"
+   (leafletMapReady)="onMapReady($event)"
+  ></div>
+
+  </ion-content>
