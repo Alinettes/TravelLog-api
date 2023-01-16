@@ -21,6 +21,10 @@ const routes: Routes = [
         loadChildren: () => import('./profile-user/profile-user.module').then( m => m.ProfileUserPageModule)
       },
       {
+        path: 'trip/:id',
+        loadChildren: () => import('./trip/trip.module').then(m => m.TripPageModule)
+      },
+      {
         path: "",
         redirectTo: "home",
         pathMatch: "full",

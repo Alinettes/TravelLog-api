@@ -11,6 +11,25 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  Profil
+<ion-content [scrollEvents]="true" (ionScrollStart)="handleScrollStart()" (ionScroll)="handleScroll($any($event))"
+  (ionScrollEnd)="handleScrollEnd()" class="ion-padding">
+  <div *ngIf="auth.getUser$() | async as user">
+    <h2>{{ user.name }}</h2>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Mes voyages</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-list>
+          <ion-item *ngFor="let trip of trips">
+            <ion-label>
+              <h2>{{ trip.title }}</h2>
+              <p>{{ trip.description }}</p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+
+  </div>
 </ion-content>

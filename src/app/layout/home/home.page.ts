@@ -7,25 +7,32 @@ import { NewTripModalComponent } from 'src/app/modals/new-trip-modal/new-trip-mo
 import { NewPlaceModalComponent } from 'src/app/modals/new-place-modal/new-place-modal.component';
 
 
+import { TripService } from '../../services/trip.service'
+import { Trip } from '../../models/trip'
+import { PlaceService } from '../../services/place.service'
+import { Place } from '../../models/place'
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit {
+  trips: Trip[];
+  places: Place[];
 
-  constructor(private auth: AuthService, public http: HttpClient, private modalController: ModalController) { }
+  constructor(private auth: AuthService, public http: HttpClient, private tripService: TripService, private placeService: PlaceService, private modalController: ModalController) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
-  //⚠ Doing an HTTP request inside a component's code is NOT a best practice. Components should not be responsible of retrieving the data, they should only be responsible of asking another service for it and providing it to their template.
-  //In your application, you should define dedicated services that will handle calling your API.
+  //utiliser mergemap pour avoir nom des users
 
   ionViewWillEnter(): void {
-    const url = `${environment.apiUrl}/trips`;
-    this.http.get(url).subscribe((trips) => {
-      console.log(`Trips loaded`, trips);
+    this.tripService.getTrips().subscribe(trip => {
+      this.trips = trip
+    });
+    this.placeService.getPlaces().subscribe(place => {
+      this.places = place
     });
   }
 
