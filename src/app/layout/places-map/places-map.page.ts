@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 import { defaultIcon } from './default-marker';
-import { latLng, Map, MapOptions, tileLayer, Marker, marker } from 'leaflet';
+import { latLng, Map, MapOptions, tileLayer, Marker, marker, LatLngExpression } from 'leaflet';
+import { PlaceService } from '../../services/place.service'
+import { Place } from '../../models/place'
 import { addIcons } from 'ionicons';
+import { threadId } from 'worker_threads';
 
 @Component({
   selector: 'app-places-map',
@@ -14,8 +17,9 @@ export class PlacesMapPage implements OnInit {
   map: Map;
   mapOptions: MapOptions;
   mapMarkers: Marker[];
+  places: Place[];
 
-  constructor() { 
+  constructor(private placeService: PlaceService) { 
     this.mapOptions = {
            layers: [
              tileLayer(
@@ -28,10 +32,12 @@ export class PlacesMapPage implements OnInit {
          };
          
     this.mapMarkers = [
-          marker([ 46.778186, 6.641524 ], { icon: defaultIcon }),
-          marker([ 46.780796, 6.647395 ], { icon: defaultIcon }),
-          marker([ 46.784992, 6.652267 ], { icon: defaultIcon })
+      
+          // marker([ 46.778186, 6.641524 ], { icon: defaultIcon }).bindTooltip('Hello'),
+          // marker([ 46.780796, 6.647395 ], { icon: defaultIcon }),
+          // marker([ 46.784992, 6.652267 ], { icon: defaultIcon })
           ];
+    
     
     
          
@@ -55,5 +61,21 @@ export class PlacesMapPage implements OnInit {
 
   ngOnInit() {
   }
+
+  ionViewWillEnter(): void {
+        this.placeService.getPlaces().subscribe(place => {
+        this.places = place;
+        console.log(this.places)
+        this.places.forEach(place => {
+
+          this.mapMarkers.push(marker(place.location.coordinates as LatLngExpression, { icon: defaultIcon }).bindTooltip(place.name))
+          console.log(place.location.coordinates)
+        });
+        
+        
+    });
+  }
+
+  
 
 }
