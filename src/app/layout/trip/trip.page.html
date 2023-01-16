@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home" text="Retour"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Voyage</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="trip">
+
+  <ion-img src="https://explorit.ch/wp-content/uploads/2019/10/placeholder.png" alt="placeholder"></ion-img>
+  <h1 class="ion-padding-horizontal">{{ trip.title }}</h1>
+
+  <ion-card>
+    <ion-card-header>
+      <!-- <ion-card-title>Description</ion-card-title> -->
+      <ion-card-subtitle>Description</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>{{ trip.description }}</ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <img alt="placeholder" src="https://northstar-pres.com/wp-content/uploads/2015/10/google-map-placeholder.png" />
+  </ion-card>
+
+  <div class="header ion-padding-horizontal">
+    <h1>Lieux</h1>
+    <div id="buttons">
+      <ion-button size="small" shape="round">
+        <ion-icon slot="icon-only" name="add"></ion-icon>
+      </ion-button>
+    </div>
+  </div>
+  <div id="places">
+    <ion-card *ngFor="let place of places" class="place" button="true">
+      <img src="{{ place.pictureUrl }}" />
+      <ion-card-header>
+        <ion-card-title>{{ place.name }}</ion-card-title>
+        <!-- <ion-card-subtitle color="primary">à 300 mètres</ion-card-subtitle> -->
+      </ion-card-header>
+      <!-- <ion-card-content>{{ place.description }}</ion-card-content> -->
+    </ion-card>
+  </div>
+
+</ion-content>

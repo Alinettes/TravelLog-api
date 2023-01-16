@@ -22,6 +22,8 @@ export class HomePage implements OnInit {
 
   ngOnInit() { }
 
+  //utiliser mergemap pour avoir nom des users
+
   ionViewWillEnter(): void {
     this.tripService.getTrips().subscribe(trip => {
       this.trips = trip

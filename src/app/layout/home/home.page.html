@@ -4,8 +4,8 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
-  <div class="header">
+<ion-content>
+  <div class="header ion-padding-horizontal">
     <h1>Voyages</h1>
     <div id="buttons">
       <ion-button size="small" shape="round">
@@ -19,7 +19,7 @@
   </div>
 
   <div id="trips">
-    <ion-card *ngFor="let trip of trips" class="trip" button="true">
+    <ion-card *ngFor="let trip of trips" class="trip" button="true" [routerLink]="['/trip', trip.id]">
       <ion-card-header>
         <ion-card-title>{{ trip.title }}</ion-card-title>
         <ion-card-subtitle><!-- {{ trip.userId }} --> pseudoUser</ion-card-subtitle>
@@ -27,7 +27,7 @@
     </ion-card>
   </div>
 
-  <div class="header">
+  <div class="header ion-padding-horizontal">
     <h1>Lieux</h1>
     <div id="buttons">
       <ion-button size="small" shape="round">

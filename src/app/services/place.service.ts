@@ -15,4 +15,9 @@ export class PlaceService {
     return this.http
       .get<Place[]>(`${environment.apiUrl}/places`);
   }
+
+  getPlacesByTrip(id: string): Observable<Place[]> {
+    return this.http
+      .get<Place[]>(`${environment.apiUrl}/places?trip=${id}`);
+  }
 }
