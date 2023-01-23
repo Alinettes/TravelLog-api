@@ -1,19 +1,14 @@
 .mapGrande {
-    height: 100%;
-    
-  }
+  height: 100%;
+}
 
 .selectedPlace {
-    position: absolute;
-    background-color: aqua;
-    margin-top: -50px;
-    
-    
-  }
-    
-ion-card-header.ios {
-    display: flex;
-    flex-flow: column-reverse;
-  }
+  position: absolute;
+  background-color: aqua;
+  margin-top: -50px;
+}
 
- 
+ion-card-header.ios {
+  display: flex;
+  flex-flow: column-reverse;
+}

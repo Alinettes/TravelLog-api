@@ -18,9 +18,6 @@
     </div>
   </div>
 
-  <ion-button (click)="takePicture()">Take picture</ion-button>
-  <img *ngIf="picture" [src]="picture.url" />
-
   <div id="trips">
     <!-- <ion-nav-link *ngFor="let trip of trips" router-direction="forward" [component]="component"> -->
     <ion-card *ngFor="let trip of trips" class="trip" button="true" [routerLink]="['trip', trip.id]"
