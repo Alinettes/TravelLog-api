@@ -118,7 +118,7 @@ export class PlacesMapPage implements OnInit {
           .on('click', () => {
             this.zone.run(() => {
               this.selectedPlaces = place;
-               this.showDescriptionModal()
+              this.showDescriptionModal()
               //ModalController //preset
               //console.log(this.selectedPlaces.name)
             })
@@ -127,6 +127,7 @@ export class PlacesMapPage implements OnInit {
           })
           )
           //console.log(place.location.coordinates)
+          this.getCurrentLocation()
         });
         
         
@@ -136,7 +137,7 @@ export class PlacesMapPage implements OnInit {
   async showDescriptionModal(): Promise<void> {
     // console.log(this.selectedPlaces.name, this.selectedPlaces.description)
     const modal = await this.modalController.create({component: ShowDescriptionModalComponent });
-
+    // modal.componentInstance.place = this.selectedPlaces;
     modal.present();
   }
 
