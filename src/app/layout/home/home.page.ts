@@ -13,8 +13,8 @@ import { PlaceService } from '../../services/place.service'
 import { Place } from '../../models/place'
 import { UserService } from '../../services/user.service'
 import { User } from '../../models/user'
-
-/* import { TripPage } from '../trip/trip.page'; */
+import { PictureService } from '../../services/picture.service'
+import { QimgImage } from '../../models/qimgimage'
 
 @Component({
   selector: 'app-home',
@@ -24,10 +24,9 @@ import { User } from '../../models/user'
 export class HomePage implements OnInit {
   trips: Trip[];
   places: Place[];
+  picture: QimgImage;
 
-  /* component = TripPage; */
-
-  constructor(private auth: AuthService, public http: HttpClient, private tripService: TripService, private placeService: PlaceService, private modalController: ModalController, private activatedRoute: ActivatedRoute, private userService: UserService) { }
+  constructor(private auth: AuthService, public http: HttpClient, private tripService: TripService, private placeService: PlaceService, private modalController: ModalController, private activatedRoute: ActivatedRoute, private userService: UserService, private pictureService: PictureService) { }
 
   ngOnInit() { }
 
@@ -35,7 +34,6 @@ export class HomePage implements OnInit {
 
   ionViewWillEnter(): void {
     this.tripService.getTrips().subscribe(trips => {
-      /* this.trips = trips */
 
       trips.forEach(trip => {
         const userId = trip.userId
@@ -61,5 +59,11 @@ export class HomePage implements OnInit {
   async showNewPlaceModal(): Promise<void> {
     const Placemodal = await this.modalController.create({component: NewPlaceModalComponent });
     Placemodal.present();
+  }
+
+  takePicture() {
+    this.pictureService.takeAndUploadPicture().subscribe(data => {
+      this.picture = data;
+    });
   }
 }
