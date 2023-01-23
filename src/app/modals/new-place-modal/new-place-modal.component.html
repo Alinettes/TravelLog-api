@@ -16,7 +16,13 @@
       <ion-input type="text" placeholder="Localisation (coordonées)" name="location" min-length="2" max-length="30"
         pattern="[a-zA-Z ]*" [(ngModel)]="location" required #locationInput="ngModel"></ion-input></ion-item>
     <ion-item>
-      <ion-input type="text" placeholder="URL de l'image" name="pictureUrl" [(ngModel)]="pictureUrl" #pictureUrlInput="ngModel"></ion-input></ion-item>
+      <!-- <ion-input type="text" placeholder="URL de l'image" name="pictureUrl" [(ngModel)]="pictureUrl"
+        #pictureUrlInput="ngModel"></ion-input> -->
+      <ion-button slot="end" (click)="takePicture()">Ajouter une photo</ion-button>
+      <ion-thumbnail *ngIf="picture" slot="start">
+        <img [src]="picture.url" />
+      </ion-thumbnail>
+    </ion-item>
     <ion-list>
       <ion-item>
         <ion-select placeholder="Selectionner le voyage">

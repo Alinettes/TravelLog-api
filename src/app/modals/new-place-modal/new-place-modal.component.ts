@@ -9,6 +9,9 @@ import { PlaceRequest } from 'src/app/models/place';
 import { PlaceService } from 'src/app/services/place.service';
 import { create } from 'domain';
 
+import { PictureService } from '../../services/picture.service'
+import { QimgImage } from '../../models/qimgimage'
+
 
 @Component({
   selector: 'app-new-place-modal',
@@ -26,8 +29,9 @@ export class NewPlaceModalComponent implements OnInit {
   pictureUrl: string;
   tripId: string;
   trips: Trip[];
+  picture: QimgImage;
 
-  constructor(private modalCtrl: ModalController, private toastController: ToastController, private tripService: TripService, private placeService: PlaceService) { }
+  constructor(private modalCtrl: ModalController, private toastController: ToastController, private tripService: TripService, private placeService: PlaceService, private pictureService: PictureService) { }
 
   ngOnInit() { }
 
@@ -47,13 +51,13 @@ export class NewPlaceModalComponent implements OnInit {
     this.modal.dismiss(this.name, 'ajouter');
     this.modal.dismiss(this.description, 'ajouter');
     this.modal.dismiss(this.location, 'ajouter');
-    this.modal.dismiss(this.pictureUrl, 'ajouter');
+    this.modal.dismiss(this.picture.url, 'ajouter');
     this.modal.dismiss(this.tripId, 'ajouter');
     this.placeService.createPlace({
       name: this.name,
       description: this.description,
-      location: this.location.coordinates,  
-      pictureUrl: this.pictureUrl,
+      location: this.location.coordinates,
+      pictureUrl: this.picture.url,
       tripId: this.tripId
     }).subscribe((response) =>{
       console.log(response)
@@ -62,7 +66,7 @@ export class NewPlaceModalComponent implements OnInit {
       console.log(error)
     });
 
-    console.log(this.name, this.description, this.location, this.pictureUrl, this.tripId)
+    console.log(this.name, this.description, this.location, this.picture.url, this.tripId)
     this.modalCtrl.dismiss() //Le dismiss devra aller dans le subscribe
     }
   }
@@ -82,5 +86,11 @@ export class NewPlaceModalComponent implements OnInit {
     if (ev.detail.role === 'ajouter') {
       this.message = `Nouveau lieu ajouté, ${ev.detail.data}!`;
     }
+  }
+
+  takePicture() {
+    this.pictureService.takeAndUploadPicture().subscribe(data => {
+      this.picture = data;
+    });
   }
 }
