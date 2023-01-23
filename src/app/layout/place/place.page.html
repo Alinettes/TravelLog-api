@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home" text="Retour"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Lieu</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="place && user">
+
+  <ion-img src="{{ place.pictureUrl }}" alt="image lieu"></ion-img>
+  <h1 class="ion-padding-horizontal">{{ place.name }}</h1>
+  <p class="ion-padding-horizontal" id="user">{{ user.name }}</p>
+
+  <ion-card>
+    <ion-card-header>
+      <!-- <ion-card-title>Description</ion-card-title> -->
+      <ion-card-subtitle>Description</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>{{ place.description }}</ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <img alt="placeholder" src="https://northstar-pres.com/wp-content/uploads/2015/10/google-map-placeholder.png" />
+  </ion-card>
+
+</ion-content>
