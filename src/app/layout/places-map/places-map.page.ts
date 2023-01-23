@@ -8,6 +8,8 @@ import { Geolocation } from '@capacitor/geolocation';
 import { addIcons } from 'ionicons';
 import { threadId } from 'worker_threads';
 import { timingSafeEqual } from 'crypto';
+import { ModalController, ViewWillEnter } from "@ionic/angular";
+import { ShowDescriptionModalComponent } from 'src/app/modals/show-description-modal/show-description-modal.component';
 import * as L from 'leaflet';
 
 @Component({
@@ -23,7 +25,13 @@ export class PlacesMapPage implements OnInit {
   places: Place[];
   selectedPlaces: Place;
 
-  constructor(private placeService: PlaceService, private zone: NgZone) {
+  // isModalOpen = false;
+
+  // setOpen(isOpen: boolean) {
+  //   this.isModalOpen = isOpen;
+  // }
+
+  constructor(private placeService: PlaceService, private zone: NgZone, private modalController: ModalController) { 
     this.mapOptions = {
       layers: [
         tileLayer(
@@ -100,30 +108,39 @@ export class PlacesMapPage implements OnInit {
   }
 
   ionViewWillEnter(): void {
-    this.placeService.getPlaces().subscribe(place => {
-      this.places = place;
-      console.log(this.places)
-      this.places.forEach(place => {
+        this.placeService.getPlaces().subscribe(place => {
+        this.places = place;
+        //console.log(this.places)
+        this.places.forEach(place => {
 
         this.mapMarkers.push(marker(place.location.coordinates as LatLngExpression, { icon: defaultIcon })
           .bindTooltip(place.name)
           .on('click', () => {
             this.zone.run(() => {
               this.selectedPlaces = place;
-              console.log(this.selectedPlaces.name)
+               this.showDescriptionModal()
+              //ModalController //preset
+              //console.log(this.selectedPlaces.name)
             })
             // console.log(place.name, place.description)
 
           })
-        )
-        console.log(place.location.coordinates)
-      });
-      // Récupérer la position actuelle
-      this.getCurrentLocation();
-
-
-
+          )
+          //console.log(place.location.coordinates)
+        });
+        
+        
     });
   }
+  
+  async showDescriptionModal(): Promise<void> {
+    // console.log(this.selectedPlaces.name, this.selectedPlaces.description)
+    const modal = await this.modalController.create({component: ShowDescriptionModalComponent });
+
+    modal.present();
+  }
+
+  
 
 }
+
