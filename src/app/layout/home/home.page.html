@@ -23,7 +23,7 @@
       <ion-card *ngFor="let trip of trips" class="trip" button="true" [routerLink]="['trip', trip.id]" routerDirection="forward">
         <ion-card-header>
           <ion-card-title>{{ trip.title }}</ion-card-title>
-          <ion-card-subtitle><!-- {{ trip.userId }} --> pseudoUser</ion-card-subtitle>
+          <ion-card-subtitle>{{ trip.userId }}</ion-card-subtitle>
         </ion-card-header>
       </ion-card>
     <!-- </ion-nav-link> -->

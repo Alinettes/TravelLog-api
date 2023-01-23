@@ -11,6 +11,8 @@ import { TripService } from '../../services/trip.service'
 import { Trip } from '../../models/trip'
 import { PlaceService } from '../../services/place.service'
 import { Place } from '../../models/place'
+import { UserService } from '../../services/user.service'
+import { User } from '../../models/user'
 
 /* import { TripPage } from '../trip/trip.page'; */
 
@@ -25,16 +27,27 @@ export class HomePage implements OnInit {
 
   /* component = TripPage; */
 
-  constructor(private auth: AuthService, public http: HttpClient, private tripService: TripService, private placeService: PlaceService, private modalController: ModalController, private activatedRoute: ActivatedRoute) { }
+  constructor(private auth: AuthService, public http: HttpClient, private tripService: TripService, private placeService: PlaceService, private modalController: ModalController, private activatedRoute: ActivatedRoute, private userService: UserService) { }
 
   ngOnInit() { }
 
   //utiliser mergemap pour avoir nom des users
 
   ionViewWillEnter(): void {
-    this.tripService.getTrips().subscribe(trip => {
-      this.trips = trip
+    this.tripService.getTrips().subscribe(trips => {
+      /* this.trips = trips */
+
+      trips.forEach(trip => {
+        const userId = trip.userId
+
+        this.userService.getUserById(userId).subscribe(user => {
+          trip.userId = user.name
+        });
+      });
+
+      this.trips = trips
     });
+
     this.placeService.getPlaces().subscribe(place => {
       this.places = place
     });
@@ -49,7 +62,4 @@ export class HomePage implements OnInit {
     const Placemodal = await this.modalController.create({component: NewPlaceModalComponent });
     Placemodal.present();
   }
-
-  // *ngIf="";
-
 }

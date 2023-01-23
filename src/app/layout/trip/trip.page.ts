@@ -27,19 +27,20 @@ export class TripPage implements OnInit {
 
   ionViewWillEnter(): void {
     let tripId = this.route.snapshot.params['tripId']
-    let userId = ""
 
     this.tripService.getTripById(tripId).subscribe(trip => {
       this.trip = trip
+      const userId = this.trip.userId
+
+      this.userService.getUserById(userId).subscribe(user => {
+        this.user = user
+      });
     });
 
     this.placeService.getPlacesByTrip(tripId).subscribe(place => {
       this.places = place
     });
 
-    this.userService.getUserById(userId).subscribe(user => {
-      this.user = user
-    });
   }
 
   async showNewPlaceModal(): Promise<void> {
