@@ -46,6 +46,4 @@ export class HomePage implements OnInit {
     Placemodal.present();
   }
 
-  // *ngIf="";
-
 }
