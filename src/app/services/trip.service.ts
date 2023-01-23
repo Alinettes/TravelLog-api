@@ -3,7 +3,7 @@ import { Trip } from '../models/trip'
 import { environment } from "src/environments/environment";
 import { Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { mergeMap } from 'rxjs/operators';
+import { catchError, mergeMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -22,12 +22,9 @@ export class TripService {
       .get<Trip>(`${environment.apiUrl}/trips/${id}`);
   }
 
-  // Recupérer les voyages de l'utilisateur loggé
-  // Doit être utilisé dans profile-user.page.ts
-  getTripsFromUser(id: number): Observable<Trip[]> {
+  getTripsByUser(userId: string): Observable<Trip[]> {
     return this.http
-      .get<Trip[]>(`${environment.apiUrl}/trips/${id}`);
+      .get<Trip[]>(`${environment.apiUrl}/trips?user=${userId}`)   
   }
-
 
 }

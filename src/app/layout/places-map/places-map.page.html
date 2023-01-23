@@ -10,14 +10,65 @@
   <div class="mapGrande" leaflet [leafletOptions]="mapOptions" [leafletLayers]="mapMarkers"
     (leafletMapReady)="onMapReady($event)"></div>
 
-  <ion-card *ngIf="selectedPlaces" class="selectedPlace">
-    <ion-card-header>
-      <ion-card-title>{{selectedPlaces.name}}</ion-card-title>
-    </ion-card-header>
 
-    <ion-card-content>
-      {{selectedPlaces.description}}
-    </ion-card-content>
-  </ion-card>
+    <!-- <ion-card *ngIf="selectedPlaces" class="selectedPlace" >
+      <ion-card-header>
+        <ion-card-title>{{selectedPlaces.name}}</ion-card-title>
+      </ion-card-header>
 
-</ion-content>
+      <ion-card-content>
+        {{selectedPlaces.description}}
+      </ion-card-content>
+    </ion-card> -->
+
+    <!-- <ion-card *ngIf="selectedPlaces" class="selectedPlace" >
+      <ion-card-header>
+        <ion-card-title>{{selectedPlaces.name}}</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        {{selectedPlaces.description}}
+      </ion-card-content>
+    </ion-card> -->
+
+
+
+      <!-- <ion-content class="ion-padding" *ngIf="selectedPlaces">
+        <ion-title>{{selectedPlaces.name}}</ion-title>
+        <p>{{selectedPlaces.description}}</p>
+      </ion-content> -->
+
+
+   <!-- <ion-content class="ion-padding" *ngIf="selectedPlaces" (click)="showDescriptionModal()">
+        <ion-title>{{selectedPlaces.name}}</ion-title>
+        <p>{{selectedPlaces.description}}</p>
+      </ion-content> -->
+
+
+
+    <!-- <ion-content class="ion-padding" *ngIf="selectedPlaces" class="selectedPlace" (click)="showDescriptionModal()" ></ion-content > -->
+
+    <!-- <ion-content class="ion-padding" *ngIf="selectedPlaces" class="selectedPlace">
+      <ion-button expand="block" (click)="showDescriptionModal()">Open</ion-button>
+      <ion-modal >
+        <ng-template>
+          <ion-header>
+            <ion-toolbar>
+              <ion-title>{{selectedPlaces.name}}</ion-title>
+              <ion-buttons slot="end">
+                <ion-button (click)="setOpen(false)">Close</ion-button>
+              </ion-buttons>
+            </ion-toolbar>
+          </ion-header>
+          <ion-content class="ion-padding">
+            <p>
+              {{selectedPlaces.description}}
+            </p>
+          </ion-content>
+        </ng-template>
+      </ion-modal>
+    </ion-content> -->
+
+
+
+  </ion-content>
