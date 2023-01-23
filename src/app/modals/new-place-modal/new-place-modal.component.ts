@@ -8,6 +8,7 @@ import { Trip } from '../../models/trip'
 import { PlaceRequest } from 'src/app/models/place';
 import { PlaceService } from 'src/app/services/place.service';
 import { create } from 'domain';
+import { Geolocation } from '@capacitor/geolocation';
 
 
 @Component({
@@ -38,6 +39,11 @@ export class NewPlaceModalComponent implements OnInit {
     });
   }
 
+  printCurrentPosition = async () => {
+    const coordinates = await Geolocation.getCurrentPosition();
+    console.log('Current position:', coordinates);
+  }
+
   cancel() {
     this.modalCtrl.dismiss(null, 'cancel');
   }
@@ -57,12 +63,13 @@ export class NewPlaceModalComponent implements OnInit {
       tripId: this.tripId
     }).subscribe((response) =>{
       console.log(response)
+      this.modalCtrl.dismiss()
     },
     (error)=> {
       console.log(error)
     });
 
-    console.log(this.name, this.description, this.location, this.pictureUrl, this.tripId)
+    console.log(this.name, this.description, this.location.coordinates, this.pictureUrl, this.tripId)
     this.modalCtrl.dismiss() //Le dismiss devra aller dans le subscribe
     }
   }

@@ -28,14 +28,14 @@ export class PlaceService {
   }
 
   createPlace(place: PlaceRequest): Observable<Place> {
-    let httpsOptions= {
+    let httpsOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        })
+      })
     }
     this.AuthService.getToken$().subscribe((token) => {
       httpsOptions.headers = httpsOptions.headers.set('Authorization', `Bearer ${token}`);
-    })
+    })
     return this.http.post<Place>(environment.apiUrl + "/places", place, httpsOptions);
   }
 }

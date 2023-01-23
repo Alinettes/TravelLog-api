@@ -13,13 +13,15 @@
       <ion-input type="text" placeholder="Description" name="description" pattern="[a-zA-Z ]*" min-length="20"
         max-length="2000" [(ngModel)]="description" required #descriptionInput="ngModel"></ion-input></ion-item>
     <ion-item>
-      <ion-input type="text" placeholder="Localisation (coordonées)" name="location" min-length="2" max-length="30"
-        pattern="[a-zA-Z ]*" [(ngModel)]="location" required #locationInput="ngModel"></ion-input></ion-item>
+      <ion-input type="text" placeholder="Localisation (coordonées)" name="location" [(ngModel)]="location" required
+        #locationInput="ngModel"></ion-input></ion-item>
     <ion-item>
-      <ion-input type="text" placeholder="URL de l'image" name="pictureUrl" [(ngModel)]="pictureUrl" #pictureUrlInput="ngModel"></ion-input></ion-item>
+      <ion-input type="text" placeholder="URL de l'image" name="pictureUrl" [(ngModel)]="pictureUrl"
+        #pictureUrlInput="ngModel"></ion-input></ion-item>
     <ion-list>
       <ion-item>
-        <ion-select placeholder="Selectionner le voyage">
+        <ion-label>Selectionner le voyage</ion-label>
+        <ion-select name="tripId" [(ngModel)]="tripId">
           <ion-select-option name="tripId" *ngFor="let trip of trips" class="trip"
             value={{trip.title}}>{{trip.title}}</ion-select-option>
         </ion-select>
