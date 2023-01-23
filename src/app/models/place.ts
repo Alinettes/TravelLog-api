@@ -12,3 +12,11 @@ export type Place = {
   createdAt: string;
   updatedAt: string;
 };
+
+export type PlaceRequest = {
+  name: string;
+  description: string;
+  location: Point;
+  pictureUrl: string;
+  tripId: string;
+}

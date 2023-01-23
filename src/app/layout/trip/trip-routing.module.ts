@@ -7,7 +7,7 @@ const routes: Routes = [
   {
     path: '',
     component: TripPage
-  },      {
+  }, {
     path: 'place/:placeId',
     loadChildren: () => import('../place/place.module').then(m => m.PlacePageModule)
   },
@@ -18,4 +18,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class TripPageRoutingModule {}
+export class TripPageRoutingModule { }

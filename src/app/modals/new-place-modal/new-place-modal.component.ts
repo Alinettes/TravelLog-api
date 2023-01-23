@@ -2,6 +2,15 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonModal, ModalController, ToastController } from '@ionic/angular';
 import { OverlayEventDetail } from '@ionic/core/components';
 import { NgForm } from '@angular/forms'
+import { Point } from 'leaflet';
+import { TripService } from '../../services/trip.service'
+import { Trip } from '../../models/trip'
+import { PlaceRequest } from 'src/app/models/place';
+import { PlaceService } from 'src/app/services/place.service';
+import { create } from 'domain';
+
+import { PictureService } from '../../services/picture.service'
+import { QimgImage } from '../../models/qimgimage'
 
 
 @Component({
@@ -14,14 +23,24 @@ export class NewPlaceModalComponent implements OnInit {
   @ViewChild(IonModal) modal: IonModal;
 
   message= "test pour voir si ça marche";
-  titre: string;
-  displayedTitre: string;
+  name: string;
   description: string;
-  localisation: string;
+  location: any;
+  pictureUrl: string;
+  tripId: string;
+  trips: Trip[];
+  picture: QimgImage;
 
-  constructor(private modalCtrl: ModalController, private toastController: ToastController) { }
+  constructor(private modalCtrl: ModalController, private toastController: ToastController, private tripService: TripService, private placeService: PlaceService, private pictureService: PictureService) { }
 
   ngOnInit() { }
+
+
+  ionViewWillEnter(): void {
+    this.tripService.getTrips().subscribe(trip => {
+      this.trips = trip
+    });
+  }
 
   cancel() {
     this.modalCtrl.dismiss(null, 'cancel');
@@ -29,18 +48,34 @@ export class NewPlaceModalComponent implements OnInit {
 
   ajouter(form: NgForm) {
     if (form.valid) {
-    this.modal.dismiss(this.titre, 'ajouter');
+    this.modal.dismiss(this.name, 'ajouter');
     this.modal.dismiss(this.description, 'ajouter');
-    this.modal.dismiss(this.localisation, 'ajouter');
-    console.log(this.titre, this.description, this.localisation)
-    this.modalCtrl.dismiss()
+    this.modal.dismiss(this.location, 'ajouter');
+    this.modal.dismiss(this.picture.url, 'ajouter');
+    this.modal.dismiss(this.tripId, 'ajouter');
+    this.placeService.createPlace({
+      name: this.name,
+      description: this.description,
+      location: this.location.coordinates,
+      pictureUrl: this.picture.url,
+      tripId: this.tripId
+    }).subscribe((response) =>{
+      console.log(response)
+    },
+    (error)=> {
+      console.log(error)
+    });
+
+    console.log(this.name, this.description, this.location, this.picture.url, this.tripId)
+    this.modalCtrl.dismiss() //Le dismiss devra aller dans le subscribe
     }
   }
 
+  //Version qui fonctionne
   async presentToast(position: 'top') {
     const toast = await this.toastController.create({
       message: 'Nouveau lieu ajouté !',
-      duration: 1500,
+      duration: 3000,
       position: position
     });
     await toast.present();
@@ -48,11 +83,14 @@ export class NewPlaceModalComponent implements OnInit {
 
   onWillDismiss(event: Event) {
     const ev = event as CustomEvent<OverlayEventDetail<string>>;
-    console.log("test1")
     if (ev.detail.role === 'ajouter') {
-      console.log("Test 2")
       this.message = `Nouveau lieu ajouté, ${ev.detail.data}!`;
-      console.log("Test 3")
     }
+  }
+
+  takePicture() {
+    this.pictureService.takeAndUploadPicture().subscribe(data => {
+      this.picture = data;
+    });
   }
 }

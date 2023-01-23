@@ -5,28 +5,46 @@
     <ion-toolbar>
       <ion-title>Ajouter un lieu</ion-title>
     </ion-toolbar>
+
     <ion-item>
-      <ion-input type="text" placeholder="Titre" name="titre" pattern="[a-zA-Z ]*" [(ngModel)]="titre" required
-        #titreInput="ngModel"></ion-input></ion-item>
+      <ion-input type="text" placeholder="Nom" name="name" pattern="[a-zA-Z ]*" [(ngModel)]="name" required
+        #nameInput="ngModel"></ion-input></ion-item>
     <ion-item>
       <ion-input type="text" placeholder="Description" name="description" pattern="[a-zA-Z ]*" min-length="20"
         max-length="2000" [(ngModel)]="description" required #descriptionInput="ngModel"></ion-input></ion-item>
     <ion-item>
-      <ion-input type="text" placeholder="Localisation (coordonées)" name="localisation" min-length="2" max-length="30"
-        pattern="[a-zA-Z ]*" [(ngModel)]="localisation" required #localisationInput="ngModel"></ion-input></ion-item>
-    <!-- pattern="[A-Za-z0-9 _.,!]" -->
-    <p *ngIf="titreInput.invalid && titreInput.dirty">
+      <ion-input type="text" placeholder="Localisation (coordonées)" name="location" min-length="2" max-length="30"
+        pattern="[a-zA-Z ]*" [(ngModel)]="location" required #locationInput="ngModel"></ion-input></ion-item>
+    <ion-item>
+      <!-- <ion-input type="text" placeholder="URL de l'image" name="pictureUrl" [(ngModel)]="pictureUrl"
+        #pictureUrlInput="ngModel"></ion-input> -->
+      <ion-button slot="end" (click)="takePicture()">Ajouter une photo</ion-button>
+      <ion-thumbnail *ngIf="picture" slot="start">
+        <img [src]="picture.url" />
+      </ion-thumbnail>
+    </ion-item>
+    <ion-list>
+      <ion-item>
+        <ion-select placeholder="Selectionner le voyage">
+          <ion-select-option name="tripId" *ngFor="let trip of trips" class="trip"
+            value={{trip.title}}>{{trip.title}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+
+    <p *ngIf="nameInput.invalid && nameInput.dirty">
       Veuillez saisir un titre et uniquement avec des lettres.
     </p>
     <p *ngIf="descriptionInput.invalid && descriptionInput.dirty">
       Veuillez saisir une description uniquement avec des lettres et au minimum avec 20 caractères.
     </p>
-    <p *ngIf="localisationInput.invalid && localisationInput.dirty">
+    <p *ngIf="locationInput.invalid && locationInput.dirty">
       Veuillez saisir une localisation entre -180 et 180 séparé par une virgule.
     </p>
 
     <ion-button fill="outline" (click)="cancel()">Annuler</ion-button>
-    <ion-button [disabled]="placeForm.invalid" type="submit" (click)="ajouter(placeForm)" (click)="presentToast('top')">Ajouter</ion-button>
+    <ion-button [disabled]="placeForm.invalid" type="submit" (click)="ajouter(placeForm)"
+      (click)="presentToast('top')">Ajouter</ion-button>
   </form>
   <!-- </ng-template> -->
 </ion-content>

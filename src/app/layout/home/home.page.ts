@@ -11,8 +11,10 @@ import { TripService } from '../../services/trip.service'
 import { Trip } from '../../models/trip'
 import { PlaceService } from '../../services/place.service'
 import { Place } from '../../models/place'
-
-/* import { TripPage } from '../trip/trip.page'; */
+import { UserService } from '../../services/user.service'
+import { User } from '../../models/user'
+import { PictureService } from '../../services/picture.service'
+import { QimgImage } from '../../models/qimgimage'
 
 @Component({
   selector: 'app-home',
@@ -22,19 +24,28 @@ import { Place } from '../../models/place'
 export class HomePage implements OnInit {
   trips: Trip[];
   places: Place[];
+  picture: QimgImage;
 
-  /* component = TripPage; */
-
-  constructor(private auth: AuthService, public http: HttpClient, private tripService: TripService, private placeService: PlaceService, private modalController: ModalController, private activatedRoute: ActivatedRoute) { }
+  constructor(private auth: AuthService, public http: HttpClient, private tripService: TripService, private placeService: PlaceService, private modalController: ModalController, private activatedRoute: ActivatedRoute, private userService: UserService, private pictureService: PictureService) { }
 
   ngOnInit() { }
 
   //utiliser mergemap pour avoir nom des users
 
   ionViewWillEnter(): void {
-    this.tripService.getTrips().subscribe(trip => {
-      this.trips = trip
+    this.tripService.getTrips().subscribe(trips => {
+
+      trips.forEach(trip => {
+        const userId = trip.userId
+
+        this.userService.getUserById(userId).subscribe(user => {
+          trip.userId = user.name
+        });
+      });
+
+      this.trips = trips
     });
+
     this.placeService.getPlaces().subscribe(place => {
       this.places = place
     });
@@ -50,6 +61,9 @@ export class HomePage implements OnInit {
     Placemodal.present();
   }
 
-  // *ngIf="";
-
+  takePicture() {
+    this.pictureService.takeAndUploadPicture().subscribe(data => {
+      this.picture = data;
+    });
+  }
 }

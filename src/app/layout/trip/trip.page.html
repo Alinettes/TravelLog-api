@@ -7,10 +7,11 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content *ngIf="trip">
+<ion-content *ngIf="trip && user">
 
   <ion-img src="https://explorit.ch/wp-content/uploads/2019/10/placeholder.png" alt="placeholder"></ion-img>
   <h1 class="ion-padding-horizontal">{{ trip.title }}</h1>
+  <p class="ion-padding-horizontal" id="user">{{ user.name }}</p>
 
   <ion-card>
     <ion-card-header>
@@ -27,8 +28,8 @@
   <div class="header ion-padding-horizontal">
     <h1>Lieux</h1>
     <div id="buttons">
-      <ion-button size="small" shape="round">
-        <ion-icon slot="icon-only" name="add"></ion-icon>
+      <ion-button size="small" shape="round" (click)="showNewPlaceModal()">
+        <ion-icon slot="icon-only" name="add" ></ion-icon>
       </ion-button>
     </div>
   </div>
