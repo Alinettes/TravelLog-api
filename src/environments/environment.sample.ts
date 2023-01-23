@@ -2,4 +2,6 @@
 export const environment = {
   production: false,
   apiUrl: "https://example.com/api",
+  qimgUrl: "https://qimg.onrender.com/api",
+  qimgSecret: "<change-with-your-token>",
 };
