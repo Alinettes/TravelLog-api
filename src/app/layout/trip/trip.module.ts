@@ -8,12 +8,15 @@ import { TripPageRoutingModule } from './trip-routing.module';
 
 import { TripPage } from './trip.page';
 
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    TripPageRoutingModule
+    TripPageRoutingModule,
+    LeafletModule
   ],
   declarations: [TripPage]
 })

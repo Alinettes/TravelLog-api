@@ -1,26 +1,21 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>PlacesMap</ion-title>
+    <ion-title>Carte</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <!-- <div class="map" leaflet [leafletOptions]="mapOptions"></div> -->
   <!-- [leafletLayers]="mapMarkers" -->
-  <div
-    class="mapGrande"
-    leaflet
-    [leafletOptions]="mapOptions"
-    [leafletLayers]="mapMarkers"
-   (leafletMapReady)="onMapReady($event)"
-  ></div>
+  <div class="mapGrande" leaflet [leafletOptions]="mapOptions" [leafletLayers]="mapMarkers"
+    (leafletMapReady)="onMapReady($event)"></div>
 
-  
+
     <!-- <ion-card *ngIf="selectedPlaces" class="selectedPlace" >
       <ion-card-header>
         <ion-card-title>{{selectedPlaces.name}}</ion-card-title>
       </ion-card-header>
-    
+
       <ion-card-content>
         {{selectedPlaces.description}}
       </ion-card-content>
@@ -30,29 +25,29 @@
       <ion-card-header>
         <ion-card-title>{{selectedPlaces.name}}</ion-card-title>
       </ion-card-header>
-    
+
       <ion-card-content>
         {{selectedPlaces.description}}
       </ion-card-content>
     </ion-card> -->
 
-    
-    
+
+
       <!-- <ion-content class="ion-padding" *ngIf="selectedPlaces">
         <ion-title>{{selectedPlaces.name}}</ion-title>
         <p>{{selectedPlaces.description}}</p>
       </ion-content> -->
-    
+
 
    <!-- <ion-content class="ion-padding" *ngIf="selectedPlaces" (click)="showDescriptionModal()">
         <ion-title>{{selectedPlaces.name}}</ion-title>
         <p>{{selectedPlaces.description}}</p>
       </ion-content> -->
 
-    
+
 
     <!-- <ion-content class="ion-padding" *ngIf="selectedPlaces" class="selectedPlace" (click)="showDescriptionModal()" ></ion-content > -->
-    
+
     <!-- <ion-content class="ion-padding" *ngIf="selectedPlaces" class="selectedPlace">
       <ion-button expand="block" (click)="showDescriptionModal()">Open</ion-button>
       <ion-modal >
@@ -74,6 +69,6 @@
       </ion-modal>
     </ion-content> -->
 
-    
-  
+
+
   </ion-content>

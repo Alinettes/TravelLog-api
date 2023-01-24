@@ -31,7 +31,7 @@ export class PlacesMapPage implements OnInit {
   //   this.isModalOpen = isOpen;
   // }
 
-  constructor(private placeService: PlaceService, private zone: NgZone, private modalController: ModalController) { 
+  constructor(private placeService: PlaceService, private zone: NgZone, private modalController: ModalController) {
     this.mapOptions = {
       layers: [
         tileLayer(
@@ -41,7 +41,6 @@ export class PlacesMapPage implements OnInit {
       ],
       zoom: 4,
       center: latLng(46.778186, 6.641524)
-
     };
 
     this.mapMarkers = [
@@ -129,8 +128,8 @@ export class PlacesMapPage implements OnInit {
           //console.log(place.location.coordinates)
           this.getCurrentLocation()
         });
-        
-        
+
+
     });
   }
   
@@ -141,7 +140,8 @@ export class PlacesMapPage implements OnInit {
     modal.present();
   }
 
-  
+
+
 
 }
 

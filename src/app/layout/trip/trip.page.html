@@ -21,9 +21,7 @@
     <ion-card-content>{{ trip.description }}</ion-card-content>
   </ion-card>
 
-  <ion-card>
-    <img alt="placeholder" src="https://northstar-pres.com/wp-content/uploads/2015/10/google-map-placeholder.png" />
-  </ion-card>
+  <div class="map" leaflet [leafletOptions]="mapOptions" (leafletMapReady)="onMapReady($event)" [leafletLayers]="mapMarkers"></div>
 
   <div class="header ion-padding-horizontal">
     <h1>Lieux</h1>
