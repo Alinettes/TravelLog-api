@@ -11,10 +11,11 @@
   </ion-toolbar>
 </ion-header>
 <!-- <ion-content class="ion-padding"> -->
-  <!-- <ion-content class="ion-padding" *ngIf="selectedPlaces">
-    <ion-title>{{selectedPlaces.name}}</ion-title>
-    <p>{{selectedPlaces.description}}</p>
-  </ion-content> -->
+  
+  <ion-content class="ion-padding" *ngIf="data">
+    <ion-title>{{data.name}}</ion-title>
+        <p>{{data.description}}</p>
+  </ion-content>
   <!-- <ion-item>
     <ion-label position="stacked">Your name</ion-label>
     <ion-input [(ngModel)]="name" placeholder="Your name"></ion-input>

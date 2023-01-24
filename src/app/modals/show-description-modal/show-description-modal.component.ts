@@ -18,27 +18,28 @@ import { ModalController } from '@ionic/angular';
 export class ShowDescriptionModalComponent implements OnInit {
 
   
-  @Input() public place;
+  // @Input() public place;
 
-  places: Place[];
-  selectedPlaces: Place;
-
-  constructor(private modalCtrl: ModalController, private placeService: PlaceService) {  }
+  //places: Place[];
+  data: Place;
+  
+  constructor(private modalCtrl: ModalController) {  }
 
   ngOnInit() { 
 
-    console.log(this.place)
-    this.placeService.getPlaces().subscribe(place => {
-          this.places = place;
-          //console.log(this.places)
-          this.places.forEach(place => {
+    console.log(this.data)
+    // console.log(this.place)
+    // this.placeService.getPlaces().subscribe(place => {
+    //       this.places = place;
+    //       //console.log(this.places)
+    //       this.places.forEach(place => {
 
                 
-          this.selectedPlaces = place;
+    //       this.selectedPlaces = place;
                 
-                // console.log(this.selectedPlaces)
-              }
-        )})
+    //             // console.log(this.selectedPlaces)
+    //           }
+    //     )})
 
 
     // console.log(this.selectedPlaces)
