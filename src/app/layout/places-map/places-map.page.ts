@@ -35,7 +35,7 @@ export class PlacesMapPage implements OnInit {
     this.mapOptions = {
       layers: [
         tileLayer(
-          'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+          'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
           { maxZoom: 18 }
         )
       ],
@@ -75,6 +75,7 @@ export class PlacesMapPage implements OnInit {
     const printCurrentLocation = async () => {
       const coordinates = await Geolocation.getCurrentPosition();
       console.log('Current', coordinates);
+      this.map.setView([coordinates.coords.latitude, coordinates.coords.longitude], 12);
     };
 
     printCurrentLocation();
@@ -92,7 +93,7 @@ export class PlacesMapPage implements OnInit {
 
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
-        console.log(position.coords.latitude, position.coords.longitude)
+        //console.log(position.coords.latitude, position.coords.longitude)
         this.mapMarkers.push(marker([position.coords.latitude, position.coords.longitude], { icon: myIcon })
           .bindTooltip('Vous êtes ici')
           .on('click', () => {
