@@ -7,8 +7,19 @@
   background-color: aqua;
   //margin-top: -50px;
 }
+// #toolbar{
+//   position: absolute;
+  
+// }
 
-ion-card-header.ios {
-  display: flex;
-  flex-flow: column-reverse;
+#btnLoc{
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  z-index: 500;
 }
+
+// ion-card-header.ios {
+//   display: flex;
+//   flex-flow: column-reverse;
+// }

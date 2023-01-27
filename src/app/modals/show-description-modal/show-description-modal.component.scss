@@ -1,3 +1,22 @@
-p {
-    margin-left: 5%;;
+// p {
+//     margin-left: 5%;;
+// }
+
+.imgDiv{
+    position:relative;
+    max-height: 65%;
+    max-width: 100%;
+    overflow: hidden;
 }
+
+.ion-padding{
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+}
+
+
+// img {
+//     max-width: 50%;
+// }

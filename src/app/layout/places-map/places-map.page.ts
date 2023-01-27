@@ -36,7 +36,7 @@ export class PlacesMapPage implements OnInit {
       layers: [
         tileLayer(
           'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-          { maxZoom: 18 }
+          {  minZoom:2, maxZoom: 18 }
         )
       ],
       zoom: 4,
@@ -75,13 +75,14 @@ export class PlacesMapPage implements OnInit {
     const printCurrentLocation = async () => {
       const coordinates = await Geolocation.getCurrentPosition();
       console.log('Current', coordinates);
-      this.map.setView([coordinates.coords.latitude, coordinates.coords.longitude], 12);
+      this.map.setView([coordinates.coords.latitude, coordinates.coords.longitude], 16);
     };
 
     printCurrentLocation();
   }
 
   getCurrentLocation() {
+    
     // Custom the marker icon
     const myIcon = L.icon({
       iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-gold.png',
@@ -98,7 +99,7 @@ export class PlacesMapPage implements OnInit {
           .bindTooltip('Vous êtes ici')
           .on('click', () => {
             this.zone.run(() => {
-              this.selectedPlaces = null;
+              
             })
           })
         )
@@ -140,6 +141,10 @@ export class PlacesMapPage implements OnInit {
     // modal.componentInstance.place = this.selectedPlaces;
     modal.present();
   }
+
+  // backToLocation(){
+  //   this.map.setView([position.coords.latitude, position.coords.longitude], 12);
+  //   }
 
 
 

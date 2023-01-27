@@ -1,23 +1,19 @@
+
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button color="medium" (click)="cancel()">Cancel</ion-button>
+      <ion-button color="medium" (click)="cancel()">Fermer</ion-button>
     </ion-buttons>
-    
-    <!-- <ion-title>Welcome</ion-title>
-    <ion-buttons slot="end">
-      <ion-button (click)="confirm()">Confirm</ion-button>
-    </ion-buttons> -->
-  </ion-toolbar>
+    </ion-toolbar>
 </ion-header>
-<!-- <ion-content class="ion-padding"> -->
+
   
   <ion-content class="ion-padding" *ngIf="data">
-    <ion-title>{{data.name}}</ion-title>
+    <div class="imgDiv">
+        <img  src="{{ data.pictureUrl }}" />
+      </div>
+        <h2>{{data.name}}</h2>
         <p>{{data.description}}</p>
   </ion-content>
-  <!-- <ion-item>
-    <ion-label position="stacked">Your name</ion-label>
-    <ion-input [(ngModel)]="name" placeholder="Your name"></ion-input>
-  </ion-item> -->
-<!-- </ion-content> -->
+
+  

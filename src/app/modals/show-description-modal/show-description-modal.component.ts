@@ -16,7 +16,7 @@ import { ModalController } from '@ionic/angular';
 
 
 export class ShowDescriptionModalComponent implements OnInit {
-
+  
   
   // @Input() public place;
 
@@ -26,7 +26,7 @@ export class ShowDescriptionModalComponent implements OnInit {
   constructor(private modalCtrl: ModalController) {  }
 
   ngOnInit() { 
-
+    
     console.log(this.data)
     // console.log(this.place)
     // this.placeService.getPlaces().subscribe(place => {
@@ -47,7 +47,7 @@ export class ShowDescriptionModalComponent implements OnInit {
   }
 
   cancel() {
-    return this.modalCtrl.dismiss(null, 'cancel');
+    return this.modalCtrl.dismiss(null, 'Fermer');
   }
 
   // confirm() {
