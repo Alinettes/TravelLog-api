@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
+
+import { latLng, Map, MapOptions, marker, Marker, LatLngExpression, tileLayer, Point } from 'leaflet';
+import { defaultIcon } from '../places-map/default-marker';
 import { ModalController, ToastController, NavController } from "@ionic/angular";
 import { ModifyPlaceModalComponent } from 'src/app/modals/modify-place-modal/modify-place-modal.component';
 import { PlaceService } from '../../services/place.service'
@@ -19,10 +22,25 @@ export class PlacePage implements OnInit {
   place: Place;
   trip: Trip;
   user: User;
+  mapOptions: MapOptions;
+  map: Map;
+  mapMarkers: Marker[];
 
-  constructor(private route: ActivatedRoute, private placeService: PlaceService, private modalController: ModalController, private navController: NavController, private toastController: ToastController, private userService: UserService, private tripService: TripService) { }
+  constructor(private route: ActivatedRoute, private placeService: PlaceService, private modalController: ModalController, private navController: NavController, private toastController: ToastController, private userService: UserService, private tripService: TripService) {
+    this.mapOptions = {
+      layers: [
+        tileLayer(
+          'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+          { maxZoom: 18 }
+        )
+      ],
+      zoom: 6,
+      center: latLng(46.778186, 6.641524)
+    };
+  }
 
   ngOnInit() { }
+
 
   ionViewWillEnter(): void {
     let id = this.route.snapshot.params['placeId']
@@ -31,16 +49,24 @@ export class PlacePage implements OnInit {
       this.place = place
       const tripId = this.place.tripId
 
+      this.mapOptions.center = latLng(place.location.coordinates[0], place.location.coordinates[1])
+
+      this.mapMarkers = []
+      this.mapMarkers.push(marker(place.location.coordinates as LatLngExpression, { icon: defaultIcon }))
+
       this.tripService.getTripById(tripId).subscribe(trip => {
         this.trip = trip
         const userId = this.trip.userId
 
         this.userService.getUserById(userId).subscribe(user => {
           this.user = user
-          console.log(this.user)
         });
       });
     });
+  }
+
+  onMapReady(map: Map) {
+    setTimeout(() => map.invalidateSize(), 0);
   }
 
   async modifyPlaceModal(): Promise<void> {

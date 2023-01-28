@@ -1,0 +1,19 @@
+
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="medium" (click)="cancel()">Fermer</ion-button>
+    </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+  
+  <ion-content class="ion-padding" *ngIf="data">
+    <div class="imgDiv">
+        <img  src="{{ data.pictureUrl }}" />
+      </div>
+        <h2>{{data.name}}</h2>
+        <p>{{data.description}}</p>
+  </ion-content>
+
+  

@@ -3,8 +3,10 @@ import { ScrollDetail } from '@ionic/angular';
 import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
 import { User } from 'src/app/models/user';
-import { TripService } from '../../services/trip.service'
-import { Trip } from '../../models/trip'
+import { TripService } from '../../services/trip.service';
+import { Trip } from '../../models/trip';
+import { ModalController, ViewWillEnter } from '@ionic/angular';
+import { NewTripModalComponent } from 'src/app/modals/new-trip-modal/new-trip-modal.component';
 import { AuthService } from "src/app/auth/auth.service";
 
 @Component({
@@ -17,11 +19,14 @@ export class ProfileUserPage implements OnInit {
   currentUser: User;
   trips: Trip[];
 
-  constructor(public auth: AuthService, private tripService: TripService, public http: HttpClient, private router: Router) {
+  constructor(public auth: AuthService, private tripService: TripService, private modalController: ModalController  , public http: HttpClient, private router: Router) {
   }
   ngOnInit(): void {
     this.auth.getUser$().subscribe((user) => {
       this.currentUser = user;
+    });
+    this.tripService.getTrips().subscribe(trip => {
+      this.trips = trip
     });
   }
 
@@ -38,13 +43,17 @@ export class ProfileUserPage implements OnInit {
     console.log('scroll end');
   }
 
-  // C'est censé afficher les voyages de l'utilisateur
-  // Pas fonctionnel pour le moment -> récupère tous les voyages de tous les utilisateurs
-  // Essai de récupérer les voyages de l'utilisateur connecté dans trip.service.ts (getTripsFromUser(id: number))
   ionViewWillEnter(): void {
-    this.tripService.getTrips().subscribe(trip => {
+    let id = this.currentUser.id;
+
+    this.tripService.getTripsByUser(id).subscribe(trip => {
       this.trips = trip
     });
+  }
+// Fonction qui va permettre d'ouvrir la modal de création de voyage
+  async showNewTripModal(): Promise<void> {
+    const modal = await this.modalController.create({component: NewTripModalComponent });
+    modal.present();
   }
 
   logOut() {
