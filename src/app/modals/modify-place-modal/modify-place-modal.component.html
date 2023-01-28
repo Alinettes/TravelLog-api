@@ -1,4 +1,4 @@
-<ion-content class="ion-padding">
+<ion-content>
   <ion-modal trigger="open-modal" (willDismiss)="onWillDismiss($event)"></ion-modal>
 
   <form #modifyPlaceForm="ngForm">
@@ -7,24 +7,21 @@
     </ion-toolbar>
 
     <ion-item>
-      <ion-label>Nom du lieu: </ion-label>
-      <ion-input type="text" placeholder="Nom" name="name" min-length="3"
-      max-length="100" [(ngModel)]="name" 
+      <ion-label>Nom</ion-label>
+      <ion-input type="text" name="name" min-length="3" max-length="100" [(ngModel)]="name"
         #nameInput="ngModel"></ion-input></ion-item> <!-- [(ngModel)]="name.content"  -->
     <ion-item>
-      <ion-label>Description du lieu: </ion-label>
-      <ion-input type="text" placeholder="Description" name="description" min-length="5"
-        max-length="50000" [(ngModel)]="description"  #descriptionInput="ngModel"></ion-input></ion-item>
+      <ion-label>Description</ion-label>
+      <ion-input type="text" name="description" min-length="5" max-length="50000"
+        [(ngModel)]="description" #descriptionInput="ngModel"></ion-input></ion-item>
     <ion-item>
-      <ion-label>Latitude: </ion-label>
-      <ion-input type="text" placeholder="latitude" name="latitude" [(ngModel)]="latitude"
-        ></ion-input></ion-item>
+      <ion-label>Latitude</ion-label>
+      <ion-input type="text" name="latitude" [(ngModel)]="latitude"></ion-input></ion-item>
     <ion-item>
-      <ion-label>Longitude: </ion-label>
-      <ion-input type="text" placeholder="longitude" name="longitude" [(ngModel)]="longitude"
-        ></ion-input></ion-item>
+      <ion-label>Longitude</ion-label>
+      <ion-input type="text" name="longitude" [(ngModel)]="longitude"></ion-input></ion-item>
     <ion-item>
-      <ion-label>Image du lieu</ion-label>
+      <ion-label>Image</ion-label>
       <ion-button slot="end" (click)="takePicture()">
         <ion-icon slot="icon-only" name="camera"></ion-icon>
       </ion-button>
@@ -35,7 +32,7 @@
 
     <ion-list>
       <ion-item>
-        <ion-label>Selectionner le voyage</ion-label>
+        <ion-label>Voyage</ion-label>
         <ion-select name="tripId" [(ngModel)]="tripId">
           <ion-select-option name="tripId" *ngFor="let trip of trips" class="trip"
             value={{trip.id}}>{{trip.title}}</ion-select-option>
@@ -43,8 +40,10 @@
       </ion-item>
     </ion-list>
 
-    <ion-button fill="outline" (click)="cancel()">Annuler</ion-button>
-    <ion-button [disabled]="modifyPlaceForm.invalid" type="submit" (click)="modifier(modifyPlaceForm)"
-      (click)="presentToast('top')">Modifier</ion-button>
+    <div class="ion-padding">
+      <ion-button fill="outline" (click)="cancel()">Annuler</ion-button>
+      <ion-button [disabled]="modifyPlaceForm.invalid" type="submit" (click)="modifier(modifyPlaceForm)"
+        (click)="presentToast('top')">Modifier</ion-button>
+    </div>
   </form>
 </ion-content>

@@ -1,4 +1,4 @@
-<ion-content class="ion-padding">
+<ion-content>
   <ion-modal trigger="open-modal" (willDismiss)="onWillDismiss($event)"></ion-modal>
   <form #tripForm="ngForm">
     <ion-toolbar>
@@ -6,24 +6,27 @@
     </ion-toolbar>
     <ion-item>
       <ion-label>Titre</ion-label>
-      <ion-input type="text" placeholder="titre du voyage" name="title" pattern="[a-zA-Z ]*" min-length="3"
-      max-length="100" [(ngModel)]="title" required
-      #titreInput="ngModel"></ion-input>
+      <ion-input type="text" name="title" pattern="[a-zA-Z ]*" min-length="3" max-length="100" [(ngModel)]="title"
+        required #titreInput="ngModel"></ion-input>
+        <ion-note *ngIf="titreInput.invalid && titreInput.dirty" slot="error">Minimum 3 caractères</ion-note>
     </ion-item>
     <ion-item>
       <ion-label>Description</ion-label>
-      <ion-input type="text" placeholder="description" name="description" min-length="5"
-      max-length="50000" [(ngModel)]="description" required #descriptionInput="ngModel"></ion-input>
+      <ion-input type="text" name="description" min-length="5" max-length="50000" [(ngModel)]="description" required
+        #descriptionInput="ngModel"></ion-input>
+        <ion-note *ngIf="descriptionInput.invalid && descriptionInput.dirty" slot="error">Minimum 5 caractères</ion-note>
     </ion-item>
 
-    <p *ngIf="titreInput.invalid && titreInput.dirty">
+    <!-- <p *ngIf="titreInput.invalid && titreInput.dirty">
       Veuillez saisir un titre uniquement avec des lettres et de min 3 caractères.
     </p>
     <p *ngIf="descriptionInput.invalid && descriptionInput.dirty">
       Veuillez saisir une description avec au minimum avec 5 caractères.
-    </p>
+    </p> -->
 
-    <ion-button fill="outline" (click)="cancel()">Annuler</ion-button>
-    <ion-button [disabled]="tripForm.invalid" type="submit" (click)="ajouter(tripForm)">Ajouter</ion-button>
+    <div class="ion-padding">
+      <ion-button fill="outline" (click)="cancel()">Annuler</ion-button>
+      <ion-button [disabled]="tripForm.invalid" type="submit" (click)="ajouter(tripForm)">Ajouter</ion-button>
+    </div>
   </form>
 </ion-content>

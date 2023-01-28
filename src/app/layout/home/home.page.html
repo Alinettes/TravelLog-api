@@ -11,10 +11,6 @@
       <ion-button size="small" shape="round" (click)="showNewTripModal()">
         <ion-icon slot="icon-only" name="add"></ion-icon>
       </ion-button>
-
-      <ion-button size="small" shape="round">
-        <ion-icon slot="icon-only" name="filter"></ion-icon>
-      </ion-button>
     </div>
   </div>
 
@@ -44,7 +40,7 @@
       <img src="{{ place.pictureUrl }}" />
       <ion-card-header>
         <ion-card-title>{{ place.name }}</ion-card-title>
-        <ion-card-subtitle color="primary">à 300 mètres</ion-card-subtitle>
+        <!-- <ion-card-subtitle color="primary">à 300 mètres</ion-card-subtitle> -->
       </ion-card-header>
       <ion-card-content>{{ place.description }}</ion-card-content>
     </ion-card>

@@ -12,29 +12,29 @@
 </ion-header>
 
 <ion-content [scrollEvents]="true" (ionScrollStart)="handleScrollStart()" (ionScroll)="handleScroll($any($event))"
-  (ionScrollEnd)="handleScrollEnd()" class="ion-padding">
-  <div class="header ion-padding-horizontal">
+  (ionScrollEnd)="handleScrollEnd()">
+  <div class="ion-padding-horizontal">
     <h2 *ngIf="auth.getUser$() | async as user">{{ user.name }}</h2>
     <ion-button id="addButton" size="small" shape="default" (click)="showNewTripModal()">
       Ajouter un voyage
       <ion-icon slot="icon-only" name="add"></ion-icon>
     </ion-button>
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>Mes voyages</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <ion-list>
-          <ion-item *ngFor="let trip of trips" class="trip" button="true" [routerLink]="['trip', trip.id]" routerDirection="forward">
-            <!-- Mettre une condition pour afficher "Pas de voyage" si l'user en a 0 --> 
-            <ion-label>
-              <h2>{{ trip.title }}</h2>
-              <p>{{ trip.description }}</p>
-            </ion-label>
-          </ion-item>
-        </ion-list>
-      </ion-card-content>
-    </ion-card>
-
   </div>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Mes voyages</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let trip of trips" class="trip" button="true" [routerLink]="['trip', trip.id]"
+          routerDirection="forward">
+          <!-- Mettre une condition pour afficher "Pas de voyage" si l'user en a 0 -->
+          <ion-label>
+            <h2>{{ trip.title }}</h2>
+            <p>{{ trip.description }}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
