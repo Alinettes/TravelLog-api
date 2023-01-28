@@ -9,7 +9,6 @@ import { PlaceRequest } from 'src/app/models/place';
 import { PlaceService } from 'src/app/services/place.service';
 import { create } from 'domain';
 import { Geolocation } from '@capacitor/geolocation';
-
 import { PictureService } from '../../services/picture.service'
 import { QimgImage } from '../../models/qimgimage'
 
@@ -23,14 +22,17 @@ import { QimgImage } from '../../models/qimgimage'
 export class NewPlaceModalComponent implements OnInit {
   @ViewChild(IonModal) modal: IonModal;
 
-  message= "test pour voir si ça marche";
+  message = "test pour voir si ça marche";
   name: string;
   description: string;
   location: any;
-  pictureUrl: string;
   tripId: string;
   trips: Trip[];
   picture: QimgImage;
+  pictureUrl: string;
+  latitude: number;
+  longitude: number;
+
 
   constructor(private modalCtrl: ModalController, private toastController: ToastController, private tripService: TripService, private placeService: PlaceService, private pictureService: PictureService) { }
 
@@ -43,10 +45,24 @@ export class NewPlaceModalComponent implements OnInit {
     });
   }
 
-  printCurrentPosition = async () => {
-    const coordinates = await Geolocation.getCurrentPosition();
+
+  /* async getCurrentPosition() {
+    try {
+      const coordinates = await Geolocation.getCurrentPosition();
+      this.location = coordinates;
+      this.latitude = coordinates.coords.latitude
+      this.longitude = coordinates.coords.longitude
+      console.log(coordinates)
+    } catch (err) {
+      console.log('Error getting location', err);
+    }
+  } */
+
+
+  /* printCurrentPosition = async () => {
+    const coordinates = await Geolocation.getCurrentPosition()
     console.log('Current position:', coordinates);
-  }
+  } */
 
   cancel() {
     this.modalCtrl.dismiss(null, 'cancel');
@@ -54,31 +70,37 @@ export class NewPlaceModalComponent implements OnInit {
 
   ajouter(form: NgForm) {
     if (form.valid) {
-    this.modal.dismiss(this.name, 'ajouter');
-    this.modal.dismiss(this.description, 'ajouter');
-    this.modal.dismiss(this.location, 'ajouter');
-    this.modal.dismiss(this.picture.url, 'ajouter');
-    this.modal.dismiss(this.tripId, 'ajouter');
-    this.placeService.createPlace({
-      name: this.name,
-      description: this.description,
-      location: this.location.coordinates,
-      pictureUrl: this.picture.url,
-      tripId: this.tripId
-    }).subscribe((response) =>{
-      console.log(response)
-      this.modalCtrl.dismiss()
-    },
-    (error)=> {
-      console.log(error)
-    });
+      this.modal.dismiss(this.name, 'ajouter');
+      this.modal.dismiss(this.description, 'ajouter');
+      this.modal.dismiss(this.latitude, 'ajouter');
+      this.modal.dismiss(this.longitude, 'ajouter');
+      this.modal.dismiss(this.picture.url, 'ajouter');
+      this.modal.dismiss(this.tripId, 'ajouter');
+      console.log(this.latitude, this.longitude)
+      let oneLocation = {
+        type: "Point",
+        coordinates: [this.latitude, this.longitude]
+      }
+      console.log("La loc est : " + oneLocation)
+      this.placeService.createPlace({
+        name: this.name,
+        description: this.description,
+        location: oneLocation,
+        pictureUrl: this.picture.url,
+        tripId: this.tripId
+      }).subscribe((response) => {
+        console.log(response)
+        this.modalCtrl.dismiss()
+        window.location.reload()
+      },
+        (error) => {
+          console.log(error)
+        });
 
-    console.log(this.name, this.description, this.location, this.picture.url, this.tripId)
-    this.modalCtrl.dismiss() //Le dismiss devra aller dans le subscribe
+      console.log(this.name, this.description, oneLocation, this.picture, this.tripId)
     }
   }
 
-  //Version qui fonctionne
   async presentToast(position: 'top') {
     const toast = await this.toastController.create({
       message: 'Nouveau lieu ajouté !',

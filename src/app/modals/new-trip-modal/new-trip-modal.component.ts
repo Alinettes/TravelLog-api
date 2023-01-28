@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { IonModal, ModalController } from '@ionic/angular';
+import { IonModal, ModalController, ToastController } from '@ionic/angular';
 import { NgForm } from '@angular/forms'
 import { OverlayEventDetail } from '@ionic/core/components';
+import { TripService } from 'src/app/services/trip.service';
 
 
 @Component({
@@ -13,10 +14,10 @@ export class NewTripModalComponent implements OnInit {
   @ViewChild(IonModal) modal: IonModal;
 
   message = "test pour voir si ça marche";
-  titre: string;
+  title: string;
   description: string;
 
-  constructor(private modalCtrl: ModalController) { }
+  constructor(private modalCtrl: ModalController, private toastController: ToastController, private tripService: TripService) { }
 
   ngOnInit() { }
 
@@ -26,11 +27,29 @@ export class NewTripModalComponent implements OnInit {
 
   ajouter(form: NgForm) {
     if (form.valid) {
-      this.modal.dismiss(this.titre, 'ajouter');
+      this.modal.dismiss(this.title, 'ajouter');
       this.modal.dismiss(this.description, 'ajouter');
-      console.log(this.titre, this.description)
+      console.log(this.title, this.description)
+      this.tripService.createTrip({
+        title: this.title,
+        description: this.description,
+      }).subscribe((response) => {
+        console.log(response)
+      },
+        (error) => {
+          console.log(error)
+        });
       this.modalCtrl.dismiss()
     }
+  }
+
+  async presentToast(position: 'top') {
+    const toast = await this.toastController.create({
+      message: 'Nouveau voyage créé !',
+      duration: 3000,
+      position: position
+    });
+    await toast.present();
   }
 
   onWillDismiss(event: Event) {

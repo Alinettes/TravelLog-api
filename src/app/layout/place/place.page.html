@@ -11,6 +11,12 @@
 
   <ion-img src="{{ place.pictureUrl }}" alt="image lieu"></ion-img>
   <h1 class="ion-padding-horizontal">{{ place.name }}</h1>
+  <ion-button size="small" shape="round" (click)="modifyPlaceModal()">
+    <ion-icon slot="icon-only" name="pencil-sharp"></ion-icon>
+  </ion-button>
+  <ion-button size="small" shape="round" name="delete" (click)="delete(place)" (click)="presentToast('top')">
+    <ion-icon slot="icon-only" name="trash-sharp"></ion-icon>
+  </ion-button>
   <p class="ion-padding-horizontal" id="user">{{ user.name }}</p>
 
   <ion-card>

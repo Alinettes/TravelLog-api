@@ -1,4 +1,5 @@
 import { Point } from "geojson";
+import { QimgImage } from "./qimgimage";
 
 export type Place = {
   id: string;
@@ -16,7 +17,16 @@ export type Place = {
 export type PlaceRequest = {
   name: string;
   description: string;
-  location: Point;
+  location: any;
+  pictureUrl: string;
+  tripId: string;
+}
+
+export type PlaceModify = {
+  id: string,
+  name: string;
+  description: string;
+  location: any;
   pictureUrl: string;
   tripId: string;
 }

@@ -9,3 +9,8 @@ export type Trip = {
   createdAt: string;
   updatedAt: string;
 };
+
+export type TripRequest = {
+  title: string;
+  description: string;
+}

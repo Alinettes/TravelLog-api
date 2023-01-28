@@ -4,9 +4,10 @@ import { FormsModule } from "@angular/forms";
 import { IonicModule } from "@ionic/angular";
 import { NewPlaceModalComponent } from "./new-place-modal/new-place-modal.component";
 import { NewTripModalComponent } from "./new-trip-modal/new-trip-modal.component";
+import { ModifyPlaceModalComponent } from "./modify-place-modal/modify-place-modal.component";
 
 @NgModule({
-    declarations: [NewTripModalComponent, NewPlaceModalComponent],
+    declarations: [NewTripModalComponent, NewPlaceModalComponent, ModifyPlaceModalComponent],
     imports: [CommonModule, FormsModule, IonicModule]
 })
 export class ModalsModule { }
