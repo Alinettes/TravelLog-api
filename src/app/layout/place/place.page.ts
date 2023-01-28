@@ -57,10 +57,13 @@ export class PlacePage implements OnInit {
       this.tripService.getTripById(tripId).subscribe(trip => {
         this.trip = trip
         const userId = this.trip.userId
+        this.place.tripId = this.trip.title
 
         this.userService.getUserById(userId).subscribe(user => {
           this.user = user
         });
+
+        this
       });
     });
   }
