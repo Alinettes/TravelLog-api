@@ -19,15 +19,15 @@
   </div>
 
   <div id="trips">
-    <!-- <ion-nav-link *ngFor="let trip of trips" router-direction="forward" [component]="component"> -->
-    <ion-card *ngFor="let trip of trips" class="trip" button="true" [routerLink]="['trip', trip.id]"
+    <ion-searchbar (keyup)="onKey($event)" show-clear-button="never" placeholder="Recherche"></ion-searchbar>
+
+    <ion-card *ngFor="let trip of tripsSearch" class="trip" button="true" [routerLink]="['trip', trip.id]"
       routerDirection="forward">
       <ion-card-header>
         <ion-card-title>{{ trip.title }}</ion-card-title>
         <ion-card-subtitle>{{ trip.userId }}</ion-card-subtitle>
       </ion-card-header>
     </ion-card>
-    <!-- </ion-nav-link> -->
   </div>
 
   <div class="header ion-padding-horizontal">

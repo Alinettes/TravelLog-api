@@ -25,7 +25,12 @@ export class TripService {
 
   getTripsByUser(userId: string): Observable<Trip[]> {
     return this.http
-      .get<Trip[]>(`${environment.apiUrl}/trips?user=${userId}`)   
+      .get<Trip[]>(`${environment.apiUrl}/trips?user=${userId}`)
+  }
+
+  getTripsBySearch(searchTerm: string): Observable<Trip[]> {
+    return this.http
+      .get<Trip[]>(`${environment.apiUrl}/trips?search=${searchTerm}`)
   }
 
   createTrip(trip: TripRequest): Observable<Trip> {
