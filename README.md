@@ -48,7 +48,7 @@ Une fois le login validé, l'utilisateur arrive sur la page d'accueil. Cette pag
   title="Optional title"
   style="display: inline-block; margin: 0 auto; width: 230px">
   
-Il est possible de consulter plus en détails les voyages et les lieux en cliquant dessus, ainsi que de les rechercher grâce à la barre de recherche. Sur la page des lieux, l'utilisateur peut le modifier ou le supprimer.
+Il est possible de consulter plus en détails les voyages et les lieux en cliquant dessus, ainsi que de les rechercher grâce à la barre de recherche. Sur la page des lieux, l'utilisateur peut le modifier ou le supprimer. A noter que l'utilisateur doit entrer les coordonées du lieu lorsque qu'il fait quelconque modification pour qu'elle soit enregistrée.
  
 <img
   src="/src/assets/img-doc/page-view-voyage.png"
