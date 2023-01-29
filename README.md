@@ -9,7 +9,7 @@ TravelLog est une application mobile crée avec Angular et Ionic dans le cadre d
 ## Installation
 Pour pouvoir utiliser l'application, il faut installer [NodeJS](https://nodejs.org/en/) sur sa machine et toutes les dépendances du projet.
 
-Il faut d'abord cloner le projet dans une invite de commande (cmd, bash, ...)
+Il faut d'abord cloner le projet dans une invite de commande (cmd, bash, ...) dans l'emplacement souhaité
 
 `git clone git@github.com:Alinettes/TravelLog-api.git`
 
@@ -35,7 +35,7 @@ Pour pouvoir utiliser l'application, les utilisateurs devront se connecter
 
 ### Application
 
-Une fois le login validé, l'utilisateur arrive sur la page d'accueil. Cette page recense les derniers voyages crées ainsi que les lieux visités par les utilisateurs de ce service. Il est également possible de consulter plus en détails les voyages et les lieux en cliquant dessus. 
+Une fois le login validé, l'utilisateur arrive sur la page d'accueil. Cette page recense les derniers voyages crées ainsi que les lieux visités par les utilisateurs de ce service. Il est possible de consulter plus en détails les voyages et les lieux en cliquant dessus, ainsi que de les rechercher grâce à la barre de recherche
 
 (montrer screen accueil + view voyage et lieu)
 
@@ -54,12 +54,11 @@ En revenant sur la page d'accueil, on peut ouvrir un formulaire en cliquant sur 
   title="Optional title"
   style="display: inline-block; margin: 0 auto; width: 230px">
 
-Depuis le voyage, on crée des places
-(montrer screen formulaire)
+Pour créer un lieu, il faut d'abord créer un voyage et l'assigner à celui-ci.
 
 ### Carte
 
-Dans la section Carte, on accède la localisation actuelle de l'utilisateur connecté avec un point jaune (seulement si l'on a accepté d'être localisé). Lorsqu'on dézoome, on aperçoit des points bleus qui représentent les lieux crées par les autres utilisateurs. On peut cliquer dessus, et voir le détail du lieu sélectionné.
+Dans la section Carte, on accède la localisation actuelle de l'utilisateur connecté avec un point jaune (seulement si l'on a accepté d'être localisé). Lorsqu'on dézoome, on aperçoit des points bleus qui représentent les lieux crées par les autres utilisateurs. On peut cliquer dessus, et voir le détail du lieu sélectionné. L'utilisateur peut retourner à tout moment sur sa localisation actuelle en appuyant sur le bouton en bas à droite.
 
 <img
   src="/src/assets/img-doc/current-location.png"
@@ -75,7 +74,7 @@ Dans la section Carte, on accède la localisation actuelle de l'utilisateur conn
 
 ### Profil
 
-Lorsque l'utilisateur clique sur la section Profil, il voit les voyages qu'il a crées lui-même. Il peut créer un voyage à partir de cette page en appuyant sur le bouton "Ajouter un voyage" et consulter le détail de ses voyages en cliquant dessus. C'est aussi sur cette page où il sera possible de se déconnecter (le bouton en haut à droite de l'écran).
+Lorsque l'utilisateur clique sur la section Profil, il voit les voyages qu'il a crée. Il est possible créer un voyage à partir de cette page en appuyant sur le bouton "Ajouter un voyage", et consulter le détail de ses voyages en cliquant dessus. C'est aussi sur cette page où il va pouvoir de se déconnecter (le bouton en haut à droite de l'écran).
 
 <img
   src="/src/assets/img-doc/view-profil.png"
