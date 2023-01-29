@@ -17,9 +17,14 @@ Il faut d'abord cloner le projet dans une invite de commande (cmd, bash, ...) da
 
 `npm install`
 
+### Créer le fichier environment.ts
+
+Pour cela, entrez dans le répertoire `src/environments/`. Il faut créer un fichier `environment.ts` et insérer le contenu qui se trouve dans le fichier `environment.sample.ts`, puis modifier les valeurs selon votre configuration.
+
 ### Démarrer l'application en local
 
 `ionic serve`
+
 
 
 ## Utilisation
