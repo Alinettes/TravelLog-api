@@ -36,7 +36,7 @@ export class PlacesMapPage implements OnInit {
       layers: [
         tileLayer(
           'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-          {  minZoom:2, maxZoom: 18 }
+          { minZoom: 2, maxZoom: 18 }
         )
       ],
       zoom: 4,
@@ -49,10 +49,6 @@ export class PlacesMapPage implements OnInit {
       // marker([ 46.780796, 6.647395 ], { icon: defaultIcon }),
       // marker([ 46.784992, 6.652267 ], { icon: defaultIcon })
     ];
-
-
-
-
   }
 
   onMapReady(map: Map) {
@@ -65,8 +61,6 @@ export class PlacesMapPage implements OnInit {
     // })
   }
 
-
-
   // onMapReady(map: Map) {
   //   this.map = map;
   // }
@@ -74,7 +68,7 @@ export class PlacesMapPage implements OnInit {
   ngOnInit() {
     const printCurrentLocation = async () => {
       const coordinates = await Geolocation.getCurrentPosition();
-      console.log('Current', coordinates);
+      //console.log('Current', coordinates);
       this.map.setView([coordinates.coords.latitude, coordinates.coords.longitude], 16);
     };
 
@@ -82,7 +76,7 @@ export class PlacesMapPage implements OnInit {
   }
 
   getCurrentLocation() {
-    
+
     // Custom the marker icon
     const myIcon = L.icon({
       iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-gold.png',
@@ -99,7 +93,7 @@ export class PlacesMapPage implements OnInit {
           .bindTooltip('Vous êtes ici')
           .on('click', () => {
             this.zone.run(() => {
-              
+
             })
           })
         )
@@ -109,10 +103,10 @@ export class PlacesMapPage implements OnInit {
   }
 
   ionViewWillEnter(): void {
-        this.placeService.getPlaces().subscribe(place => {
-        this.places = place;
-        //console.log(this.places)
-        this.places.forEach(place => {
+    this.placeService.getPlaces().subscribe(place => {
+      this.places = place;
+      //console.log(this.places)
+      this.places.forEach(place => {
 
         this.mapMarkers.push(marker(place.location.coordinates as LatLngExpression, { icon: defaultIcon })
           .bindTooltip(place.name)
@@ -126,18 +120,18 @@ export class PlacesMapPage implements OnInit {
             // console.log(place.name, place.description)
 
           })
-          )
-          //console.log(place.location.coordinates)
-          this.getCurrentLocation()
-        });
+        )
+        //console.log(place.location.coordinates)
+        this.getCurrentLocation()
+      });
 
 
     });
   }
-  
+
   async showDescriptionModal(sPlaces: Place): Promise<void> {
     // console.log(this.selectedPlaces.name, this.selectedPlaces.description)
-    const modal = await this.modalController.create({component: ShowDescriptionModalComponent, componentProps: { data:sPlaces} });
+    const modal = await this.modalController.create({ component: ShowDescriptionModalComponent, componentProps: { data: sPlaces } });
     // modal.componentInstance.place = this.selectedPlaces;
     modal.present();
   }
@@ -145,9 +139,5 @@ export class PlacesMapPage implements OnInit {
   // backToLocation(){
   //   this.map.setView([position.coords.latitude, position.coords.longitude], 12);
   //   }
-
-
-
-
 }
 

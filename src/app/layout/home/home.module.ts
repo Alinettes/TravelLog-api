@@ -14,7 +14,8 @@ import { ModalsModule } from 'src/app/modals/modals.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    HomePageRoutingModule, ModalsModule
+    HomePageRoutingModule,
+    ModalsModule,
   ],
   declarations: [HomePage]
 })

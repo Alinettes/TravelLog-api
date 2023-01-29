@@ -10,24 +10,30 @@
 <ion-content *ngIf="place && user" >
 
   <ion-img src="{{ place.pictureUrl }}" alt="image lieu"></ion-img>
-  <h1 class="ion-padding-horizontal">{{ place.name }}</h1>
-  <ion-button size="small" shape="round" (click)="openModal(place)">
-    <ion-icon slot="icon-only" name="pencil-sharp"></ion-icon>
-  </ion-button>
-<!--   <app-modify-place-modal [place]="place"></app-modify-place-modal>
- -->  <ion-button size="small" shape="round" name="delete" (click)="delete(place)" (click)="presentToast('top')">
-    <ion-icon slot="icon-only" name="trash-sharp"></ion-icon>
-  </ion-button>
+
+  <div class="header ion-padding-horizontal">
+    <h1>{{ place.name }}</h1>
+    <p>Voyage : {{ place.tripId }}</p>
+    <div id="buttons">
+      <ion-button size="small" shape="round" (click)="openModal(place)">
+        <ion-icon slot="icon-only" name="pencil-sharp"></ion-icon>
+      </ion-button>
+      <ion-button size="small" shape="round" name="delete" (click)="delete(place)" (click)="presentToast('top')">
+        <ion-icon slot="icon-only" name="trash"></ion-icon>
+      </ion-button>
+    </div>
+  </div>
+
   <p class="ion-padding-horizontal" id="user">{{ user.name }}</p>
 
   <ion-card>
     <ion-card-header>
-      <!-- <ion-card-title>Description</ion-card-title> -->
       <ion-card-subtitle>Description</ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>{{ place.description }}</ion-card-content>
   </ion-card>
 
-  <div class="map" leaflet [leafletOptions]="mapOptions" (leafletMapReady)="onMapReady($event)" [leafletLayers]="mapMarkers"></div>
+  <div class="map" leaflet [leafletOptions]="mapOptions" (leafletMapReady)="onMapReady($event)"
+    [leafletLayers]="mapMarkers"></div>
 
 </ion-content>
