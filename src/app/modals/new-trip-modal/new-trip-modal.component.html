@@ -6,7 +6,7 @@
     </ion-toolbar>
     <ion-item>
       <ion-label>Titre</ion-label>
-      <ion-input type="text" placeholder="titre du voyage" name="title" pattern="[a-zA-Z ]*" min-length="3"
+      <ion-input type="text" placeholder="titre du voyage" name="title" min-length="3"
       max-length="100" [(ngModel)]="title" required
       #titreInput="ngModel"></ion-input>
     </ion-item>
@@ -17,7 +17,7 @@
     </ion-item>
 
     <p *ngIf="titreInput.invalid && titreInput.dirty">
-      Veuillez saisir un titre uniquement avec des lettres et de min 3 caractères.
+      Veuillez saisir un titre de minimum 3 caractères.
     </p>
     <p *ngIf="descriptionInput.invalid && descriptionInput.dirty">
       Veuillez saisir une description avec au minimum avec 5 caractères.

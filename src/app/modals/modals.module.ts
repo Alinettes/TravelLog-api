@@ -9,7 +9,9 @@ import { ShowDescriptionModalComponent } from "./show-description-modal/show-des
 
 @NgModule({
     declarations: [NewTripModalComponent, NewPlaceModalComponent, ShowDescriptionModalComponent, ModifyPlaceModalComponent],
-    imports: [CommonModule, FormsModule, IonicModule]
+    imports: [CommonModule, FormsModule, IonicModule],
+    entryComponents: [ModifyPlaceModalComponent],
+    exports: [ModifyPlaceModalComponent]
 })
 
 export class ModalsModule { }

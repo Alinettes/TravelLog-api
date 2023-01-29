@@ -5,7 +5,7 @@ import { Observable, of, throwError, catchError } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from '../auth/auth.service';
 import { Point } from 'leaflet';
-import { map } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +21,7 @@ export class PlaceService {
 
   getPlaceById(id: string): Observable<Place> {
     return this.http
-      .get<Place>(`${environment.apiUrl}/places/${id}`);
+      .get<Place>(`${environment.apiUrl}/places/${id}`)
   }
 
   getPlacesByTrip(id: string): Observable<Place[]> {
@@ -48,8 +48,8 @@ export class PlaceService {
       })
     }
     this.AuthService.getToken$().subscribe((token) => {
-      httpsOptions.headers = httpsOptions.headers.set('Authorization', `Bearer ${localStorage.getItem('access_token')}`);
-    })
+      httpsOptions.headers = httpsOptions.headers.set('Authorization', `Bearer ${token}`)})
+    
     const placeData = {
       name: place.name, 
       description: place.description,
@@ -57,16 +57,14 @@ export class PlaceService {
       pictureUrl: place.pictureUrl,
       tripId: place.tripId
     }
-
     const placeDataClean = Object.entries(placeData)
       .filter(([key, value]) => value)
       .reduce((obj, [key, value]) => {
         obj[key] = value;
         return obj;
       }, {});
-    console.log("PlaceDataClean : " + placeDataClean)
 
-    return this.http.put(environment.apiUrl + `places/${place.id}`, placeDataClean, httpsOptions)
+      return this.http.patch(environment.apiUrl + `/places/${place.id}`, placeDataClean, httpsOptions)
       .pipe(
         map(response => {
           console.log(response)
@@ -77,8 +75,9 @@ export class PlaceService {
       ).subscribe(
         (data) => console.log("success: ", data),
         (error) => console.log("error: ", error)
-      )
+      );
   }
+
 
   deletePlace(place: Place) {
     let httpsOptions = {

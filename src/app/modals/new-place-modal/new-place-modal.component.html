@@ -23,15 +23,6 @@
       <ion-label>Longitude: </ion-label>
       <ion-input type="text" placeholder="longitude" name="longitude" [(ngModel)]="longitude"
         required></ion-input></ion-item>
-    <!--  <ion-item>
-      <ion-label>Coordonées du lieu : </ion-label>
-      <ion-input name="location" [(ngModel)]="location">
-        <ion-button (click)="getCurrentPosition()" > 
-          <ion-icon slot="end" slot="icon-only" name="location-sharp"></ion-icon>
-        </ion-button>
-      </ion-input></ion-item> -->
-    <!-- <ion-input type="text" placeholder="URL de l'image" name="pictureUrl" [(ngModel)]="pictureUrl"
-        #pictureUrlInput="ngModel"></ion-input></ion-item> -->
     <ion-item>
       <ion-label>Image du lieu</ion-label>
       <ion-button slot="end" (click)="takePicture()">

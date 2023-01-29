@@ -45,25 +45,6 @@ export class NewPlaceModalComponent implements OnInit {
     });
   }
 
-
-  /* async getCurrentPosition() {
-    try {
-      const coordinates = await Geolocation.getCurrentPosition();
-      this.location = coordinates;
-      this.latitude = coordinates.coords.latitude
-      this.longitude = coordinates.coords.longitude
-      console.log(coordinates)
-    } catch (err) {
-      console.log('Error getting location', err);
-    }
-  } */
-
-
-  /* printCurrentPosition = async () => {
-    const coordinates = await Geolocation.getCurrentPosition()
-    console.log('Current position:', coordinates);
-  } */
-
   cancel() {
     this.modalCtrl.dismiss(null, 'cancel');
   }

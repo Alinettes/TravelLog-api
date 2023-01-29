@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-
 import { latLng, Map, MapOptions, marker, Marker, LatLngExpression, tileLayer, Point } from 'leaflet';
 import { defaultIcon } from '../places-map/default-marker';
-import { ModalController, ToastController, NavController } from "@ionic/angular";
+import { ModalController, ToastController, NavController, NavParams } from "@ionic/angular";
 import { ModifyPlaceModalComponent } from 'src/app/modals/modify-place-modal/modify-place-modal.component';
 import { PlaceService } from '../../services/place.service'
 import { Place } from '../../models/place'
@@ -12,21 +11,26 @@ import { User } from '../../models/user'
 import { TripService } from '../../services/trip.service'
 import { Trip } from '../../models/trip'
 
-
 @Component({
   selector: 'app-place',
   templateUrl: './place.page.html',
   styleUrls: ['./place.page.scss'],
 })
+
 export class PlacePage implements OnInit {
-  place: Place;
+  @Input() placeToModify: any;
+  @Input() selectedPlace: any;
+
+  place: any;
+  //place: Place;
   trip: Trip;
   user: User;
   mapOptions: MapOptions;
   map: Map;
   mapMarkers: Marker[];
+  data: any;
 
-  constructor(private route: ActivatedRoute, private placeService: PlaceService, private modalController: ModalController, private navController: NavController, private toastController: ToastController, private userService: UserService, private tripService: TripService) {
+  constructor(private route: ActivatedRoute, private placeService: PlaceService, private modalController: ModalController, private navController: NavController, private toastController: ToastController, private userService: UserService, private tripService: TripService, private navParams: NavParams) {
     this.mapOptions = {
       layers: [
         tileLayer(
@@ -39,7 +43,10 @@ export class PlacePage implements OnInit {
     };
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    let placeId = this.navParams.get('placeId');
+    this.data = this.navParams.get('data')
+  }
 
 
   ionViewWillEnter(): void {
@@ -69,9 +76,13 @@ export class PlacePage implements OnInit {
     setTimeout(() => map.invalidateSize(), 0);
   }
 
-  async modifyPlaceModal(): Promise<void> {
-    const Placemodal = await this.modalController.create({ component: ModifyPlaceModalComponent });
-    Placemodal.present();
+  openModal(place) {
+    this.modalController.create({
+      component: ModifyPlaceModalComponent,
+      componentProps: {
+        selectedPlace: this.selectedPlace
+      }
+    }).then(modal => modal.present());
   }
 
   async delete(service: Place) {
